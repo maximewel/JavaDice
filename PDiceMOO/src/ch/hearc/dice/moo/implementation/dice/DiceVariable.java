@@ -2,6 +2,7 @@
 package ch.hearc.dice.moo.implementation.dice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,10 +10,8 @@ import ch.hearc.b_poo.thread.vecteur.Interval;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
 import ch.hearc.tools.AlgoIteratif_A;
 import ch.hearc.tools.Chrono;
-import ch.hearc.tools.IterationEvent;
-import ch.hearc.tools.IterationListener_I;
 
-public class DiceVariable extends AlgoIteratif_A implements IterationListener_I ,DiceVariable_I
+public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 	{
 
 	/*------------------------------------------------------------------*\
@@ -24,31 +23,40 @@ public class DiceVariable extends AlgoIteratif_A implements IterationListener_I 
 		super();
 		this.nbExperience = nbExperience;
 		this.nbFaces = nbFaces;
+		this.mapFaceLancer = new HashMap<Integer, Integer>();
+		this.mapChronoLancer = new HashMap<Integer, Chrono>();
 		this.dices = new ArrayList<Dice>();
+
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
-	@Override
-	public void iterationPerformed(IterationEvent iterationEvent)
-		{
-		// TODO Auto-generated method stub
-
-		}
 
 	@Override
 	public void onBegin()
 		{
-		// TODO Auto-generated method stub
+		this.dices.clear();
+		this.mapFaceLancer.clear();
+		this.mapChronoLancer.clear();
 
+		for(Integer i:nbFaces)
+			{
+			this.dices.add(new Dice(i, nbExperience, TypeProcessing.PARALLELE));
+			}
 		}
 
 	@Override
 	public void iterationStep(int i)
 		{
-		// TODO Auto-generated method stub
+		Chrono chrono = new Chrono();
+		this.mapChronoLancer.put(i, chrono);
 
+		chrono.start();
+		this.dices.get(i).run();
+		chrono.stop();
+
+		this.mapFaceLancer.put(i, this.dices.get(i).getNbLancerMoyen());
 		}
 
 	@Override
@@ -61,26 +69,19 @@ public class DiceVariable extends AlgoIteratif_A implements IterationListener_I 
 	@Override
 	public boolean isFinished(int i)
 		{
-		if (i >= dices.size())
-			{
-				return true;
-				}
-		// TODO Auto-generated method stub
-		return false;
+		return this.mapFaceLancer.keySet().contains(i);
 		}
 
 	@Override
 	public Map<Integer, Integer> getMapFaceLancer()
 		{
-		// TODO Auto-generated method stub
-		return null;
+		return mapFaceLancer;
 		}
 
 	@Override
 	public Map<Integer, Chrono> getMapFaceChrono()
 		{
-		// TODO Auto-generated method stub
-		return null;
+		return mapChronoLancer;
 		}
 
 	@Override
@@ -110,4 +111,7 @@ public class DiceVariable extends AlgoIteratif_A implements IterationListener_I 
 	private Interval nbFaces;
 	private int nbExperience;
 	private List<Dice> dices;
+
+	private Map<Integer, Integer> mapFaceLancer;
+	private Map<Integer, Chrono> mapChronoLancer;
 	}

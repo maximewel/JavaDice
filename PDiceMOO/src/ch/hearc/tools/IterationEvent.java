@@ -19,7 +19,15 @@ public class IterationEvent
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+	public int getI()
+		{
+		return this.i;
+		}
 
+	public EtatAlgo getEtatAlgo()
+		{
+		return this.etatAlgo;
+		}
 
 
 	/*------------------------------*\
@@ -36,6 +44,7 @@ public class IterationEvent
 
 	//input / output
 	private AlgoIteratif_A source;
+
 	private int i;
 	private EtatAlgo etatAlgo;
 	}
