@@ -2,6 +2,7 @@
 package ch.hearc.dice.moo.implementation.dice;
 
 import ch.hearc.b_poo.thread.vecteur.Interval;
+import ch.hearc.tools.AlgoIteratif_A;
 import ch.hearc.tools.IterationEvent;
 import ch.hearc.tools.IterationListener_I;
 
@@ -25,11 +26,10 @@ public class UseDiceVariableListener
 		int nbAlgo = interval.getB()-interval.getA();
 		int nbExperience = Integer.MAX_VALUE / 5000; // Cette technique garantit de ne pas deborder le type int (Wrapper : plein de methodes utiles!)
 
-		DiceVariable diceVar = new DiceVariable(interval, nbExperience, TypeProcessing.PARALLELE);
+		AlgoIteratif_A diceVar = new DiceVariable(interval, nbExperience, TypeProcessing.PARALLELE);
 
 		diceVar.addIterationListener(new IterationListener_I()
 			{
-
 			@Override
 			public void iterationPerformed(IterationEvent it)
 				{

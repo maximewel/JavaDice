@@ -19,35 +19,46 @@ public class UseSpeedUp
 		{
 		System.out.println("Please wait ...\n");
 
-		int nbFace = 6;
-		int nbExperience = Integer.MAX_VALUE / 500; // Cette technique garantit de ne pas deborder le type int (Wrapper : plein de methodes utiles!)
+		String aString = System.getProperty("nbFace", "6");
+		String bString = System.getProperty("nbExperience", "23000");
 
-		Dice dicePar = new Dice(nbFace, nbExperience, TypeProcessing.PARALLELE);
-		Dice diceSeq = new Dice(nbFace, nbExperience, TypeProcessing.SEQUENTIEL);
+		try
+			{
+			int nbFace = Integer.parseInt(aString);
+			int nbExperience = Integer.parseInt(bString);
 
-		Chrono chronoPar = new Chrono();
-		dicePar.run();
-		chronoPar.stop();
+			Dice dicePar = new Dice(nbFace, nbExperience, TypeProcessing.PARALLELE);
+			Dice diceSeq = new Dice(nbFace, nbExperience, TypeProcessing.SEQUENTIEL);
 
-		Chrono chronoSeq = new Chrono();
-		diceSeq.run();
-		chronoSeq.stop();
+			Chrono chronoPar = new Chrono();
+			dicePar.run();
+			chronoPar.stop();
 
-		System.out.println("Result Parallelism : ");
-		System.out.println(dicePar);
-		System.out.println(chronoPar);
+			Chrono chronoSeq = new Chrono();
+			diceSeq.run();
+			chronoSeq.stop();
 
-		System.out.println("\n------------------- \n");
+			System.out.println("Result Parallelism : ");
+			System.out.println(dicePar);
+			System.out.println(chronoPar);
 
-		System.out.println("Result Sequentiel : ");
-		System.out.println(diceSeq);
-		System.out.println(chronoSeq);
+			System.out.println("\n------------------- \n");
 
-		float diff = ((float)chronoSeq.getTimeMS()/chronoPar.getTimeMS());
+			System.out.println("Result Sequentiel : ");
+			System.out.println(diceSeq);
+			System.out.println(chronoSeq);
 
-		//we print a int only, decimals aren't that useful for the comparison
-		System.out.format("\n\nSpeed up: parallelism is %.03f times faster\n", diff);
-		System.out.println("Nb logical cores: " + Runtime.getRuntime().availableProcessors());
+			float diff = ((float)chronoSeq.getTimeMS()/chronoPar.getTimeMS());
+
+			//we print a int only, decimals aren't that useful for the comparison
+			System.out.format("\n\nSpeed up: parallelism is %.03f times faster\n", diff);
+			System.out.println("Nb logical cores: " + Runtime.getRuntime().availableProcessors());
+			}
+		catch (NumberFormatException e)
+			{
+			System.err.println("Parametres non valides");
+			System.exit(-1); // 0 normal, -1 anormal
+			}
 		}
 
 	/*------------------------------------------------------------------*\
