@@ -1,8 +1,8 @@
 
 package ch.hearc.tools;
 
-import ch.hearc.dice.moo.implementation.dice.Dice;
-import ch.hearc.dice.moo.implementation.dice.TypeProcessing;
+import ch.hearc.dice.moo.implementation.Dice;
+import ch.hearc.dice.moo.implementation.TypeProcessing;
 
 public class UseSpeedUp
 	{

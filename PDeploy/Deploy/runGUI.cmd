@@ -65,16 +65,13 @@ rem ---------------
 rem version light
 rem ---------------
 
-rem java -cp .;./*;./ext/* ch.hearc.cours_01.kitbase.container.tableau.mono.quadratique.UseQuadratique
-rem java -cp .;./*;./ext/* ch.hearc.cours_01.kitbase.container.tableau.mono.linear.UseLinear
-rem java -cp .;./*;./ext/* ch.hearc.cours_01.kitbase.container.tableau.mono.linear.UseLinearArgs 6 2
-java -cp .;./*;./ext/* -Da=4 -Db=5 ch.hearc.cours_01.kitbase.container.tableau.mono.linear.UseLinearSystemProperty
+java -cp .;./*;./ext/* ch.hearc.dice.gui.UseJDice
 
 rem ---------------
 rem version options
 rem ---------------
 
-rem java -cp .;./*;./ext/* -Xmx20m -Xms10m -verbose:gc -ea ch.hearc.cours_01.kitbase.hello.UseHello
+rem java -cp .;./*;./ext/* -Xmx20m -Xms10m -verbose:gc -ea ch.hearc.dice.gui.UseJDice
 
 rem -------------------------------------------
 rem 			end

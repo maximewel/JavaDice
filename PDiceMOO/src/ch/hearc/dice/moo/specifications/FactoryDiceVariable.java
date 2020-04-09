@@ -2,8 +2,8 @@
 package ch.hearc.dice.moo.specifications;
 
 import ch.hearc.b_poo.thread.vecteur.Interval;
-import ch.hearc.dice.moo.implementation.dice.DiceVariable;
-import ch.hearc.dice.moo.implementation.dice.TypeProcessing;
+import ch.hearc.dice.moo.implementation.DiceVariable;
+import ch.hearc.dice.moo.implementation.TypeProcessing;
 
 public class FactoryDiceVariable
 	{

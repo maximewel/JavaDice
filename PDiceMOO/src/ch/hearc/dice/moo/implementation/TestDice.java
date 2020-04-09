@@ -1,5 +1,5 @@
 
-package ch.hearc.dice.moo.implementation.dice;
+package ch.hearc.dice.moo.implementation;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
