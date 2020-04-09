@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public abstract class AlgoIteratif_A implements Runnable
+import ch.hearc.dice.moo.specifications.DiceVariable_I;
+
+public abstract class AlgoIteratif_A implements Runnable, DiceVariable_I
 	{
 
 	/*------------------------------------------------------------------*\
