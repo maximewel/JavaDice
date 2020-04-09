@@ -29,7 +29,6 @@ public class IterationEvent
 		return this.etatAlgo;
 		}
 
-
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/

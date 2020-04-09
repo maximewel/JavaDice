@@ -55,6 +55,12 @@ public abstract class AlgoIteratif_A implements Runnable
 				i++;
 				}
 			}
+			// onEnd()
+			{
+			onEnd();
+			IterationEvent iterationEvent = new IterationEvent(this, -1, EtatAlgo.END);
+			avertirListener(iterationEvent);
+			}
 
 		}
 

@@ -18,11 +18,12 @@ public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public DiceVariable(Interval nbFaces, int nbExperience)
+	public DiceVariable(Interval nbFaces, int nbExperience, TypeProcessing type)
 		{
 		super();
 		this.nbExperience = nbExperience;
 		this.nbFaces = nbFaces;
+		this.typeProcessing = type;
 		this.mapFaceLancer = new HashMap<Integer, Integer>();
 		this.mapChronoLancer = new HashMap<Integer, Chrono>();
 		this.dices = new ArrayList<Dice>();
@@ -42,7 +43,7 @@ public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 
 		for(Integer i:nbFaces)
 			{
-			this.dices.add(new Dice(i, nbExperience, TypeProcessing.PARALLELE));
+			this.dices.add(new Dice(i, nbExperience, this.typeProcessing));
 			}
 		}
 
@@ -50,13 +51,18 @@ public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 	public void iterationStep(int i)
 		{
 		Chrono chrono = new Chrono();
-		this.mapChronoLancer.put(i, chrono);
 
 		chrono.start();
 		this.dices.get(i).run();
 		chrono.stop();
 
+		this.mapChronoLancer.put(i, chrono);
 		this.mapFaceLancer.put(i, this.dices.get(i).getNbLancerMoyen());
+
+		if (i+1 >= nbFaces.getB()-nbFaces.getA())
+			{
+				this.stop();
+			}
 		}
 
 	@Override
@@ -111,6 +117,7 @@ public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 	private Interval nbFaces;
 	private int nbExperience;
 	private List<Dice> dices;
+	private TypeProcessing typeProcessing;
 
 	private Map<Integer, Integer> mapFaceLancer;
 	private Map<Integer, Chrono> mapChronoLancer;
