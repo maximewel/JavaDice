@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -17,6 +18,7 @@ import ch.hearc.c_gui.tools.JComponents;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
 import ch.hearc.dice.tools.ImageShop;
 import ch.hearc.tools.DiceBuilder;
+import ch.hearc.tools.EtatAlgo;
 import ch.hearc.tools.IterationEvent;
 import ch.hearc.tools.IterationListener_I;
 
@@ -94,6 +96,8 @@ public class JMenu extends Box
 
 	private void control()
 		{
+		doStop = new AtomicBoolean(false); //at first, we want the algo to be able to run
+
 		//quit button
 		buttonQuit.addActionListener(new ActionListener()
 			{
@@ -114,6 +118,7 @@ public class JMenu extends Box
 				{
 				diceVariable = diceBuilder.build();
 				diceVariable.addIterationListener(createIterationListener());
+				doStop.set(false);
 
 				diceThread = new Thread(diceVariable);
 				diceThread.start();
@@ -124,14 +129,13 @@ public class JMenu extends Box
 			});
 
 		//stop button
-		buttonStart.addActionListener(new ActionListener()
+		buttonStop.addActionListener(new ActionListener()
 			{
 
 			@Override
 			public void actionPerformed(ActionEvent e)
 				{
-				//diceVariable.stop();
-				//buttonline.switchButtonEnabled();
+				doStop.set(true);
 				}
 			});
 
@@ -187,6 +191,14 @@ public class JMenu extends Box
 				{
 				System.out.println("Algo " + it.getI());
 				System.out.println("  State : " + it.getEtatAlgo().toString());
+				if (doStop.get())
+					{
+					it.getAlgoIteratif().stop();
+					}
+				if (it.getEtatAlgo() == EtatAlgo.END)
+					{
+					buttonline.switchButtonEnabled();
+					}
 				}
 			};
 		}
@@ -240,6 +252,7 @@ public class JMenu extends Box
 	private DiceBuilder diceBuilder;
 	private DiceVariable_I diceVariable;
 	private Thread diceThread;
+	AtomicBoolean doStop;
 
 	//general standardisation of UI
 	private static final int SPACING = 10;

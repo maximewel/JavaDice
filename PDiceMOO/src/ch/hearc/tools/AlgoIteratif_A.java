@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
 
-public abstract class AlgoIteratif_A implements Runnable, DiceVariable_I
+public abstract class AlgoIteratif_A implements Runnable ,DiceVariable_I
 	{
 
 	/*------------------------------------------------------------------*\
@@ -36,7 +36,6 @@ public abstract class AlgoIteratif_A implements Runnable, DiceVariable_I
 		isStop.set(true);
 		}
 
-
 	@Override
 	public void run()
 		{
@@ -58,7 +57,7 @@ public abstract class AlgoIteratif_A implements Runnable, DiceVariable_I
 				i++;
 				}
 			}
-			// onEnd()
+		// onEnd()
 			{
 			onEnd();
 			IterationEvent iterationEvent = new IterationEvent(this, -1, EtatAlgo.END);
