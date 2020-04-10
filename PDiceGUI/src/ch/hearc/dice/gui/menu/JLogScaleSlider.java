@@ -1,6 +1,8 @@
 
 package ch.hearc.dice.gui.menu;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -12,7 +14,8 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import ch.hearc.c_gui.tools.JCenter;
+import ch.hearc.c_gui.tools.JCenterH;
+import ch.hearc.tools.DiceBuilder;
 
 public class JLogScaleSlider extends Box
 	{
@@ -21,7 +24,7 @@ public class JLogScaleSlider extends Box
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JLogScaleSlider(String title, int base, int scale)
+	public JLogScaleSlider(String title, int base, int scale, DiceBuilder diceBuilder)
 		{
 
 		super(BoxLayout.Y_AXIS);
@@ -29,19 +32,12 @@ public class JLogScaleSlider extends Box
 		this.scale = scale;
 		this.base = base;
 		this.title = title;
+		this.diceBuilder = diceBuilder;
 
 		geometry();
 		control();
 		appearance();
 		}
-
-	/*------------------------------------------------------------------*\
-	|*							Methodes Public							*|
-	\*------------------------------------------------------------------*/
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -53,8 +49,7 @@ public class JLogScaleSlider extends Box
 		//tick precision is there to simulate a double value from the int slider :
 		//the value is multiplied by tickvalue on the slider. then when we read it, we divide it by
 		//the tick value. as such, 0<->tickvalue on the slider => 0.0<->1.0 read.
-		slider = new JSlider(SwingConstants.HORIZONTAL, 0, scale*TICK_PRECISION, 0);
-
+		slider = new JSlider(SwingConstants.HORIZONTAL, 0, scale * TICK_PRECISION, 0);
 
 		JLabel titleLabel = new JLabel(title);
 
@@ -63,9 +58,11 @@ public class JLogScaleSlider extends Box
 		boxCurrentValue.add(new JLabel("Current : "));
 		boxCurrentValue.add(labelCurrentValue);
 
-		this.add(new JCenter(titleLabel));
+		this.add(new JCenterH(titleLabel));
+		this.add(JMenu.createVSpacing());
 		this.add(slider);
-		this.add(boxCurrentValue);
+		this.add(JMenu.createVSpacing());
+		this.add(new JCenterH(boxCurrentValue));
 		}
 
 	private void control()
@@ -78,10 +75,17 @@ public class JLogScaleSlider extends Box
 				{
 				int rawValue = slider.getValue();
 				double doubleValue = (double)rawValue / TICK_PRECISION;
-				double logValue = Math.pow(base, doubleValue);
+				int logValue = (int)Math.pow(base, doubleValue);
 
-				labelCurrentValue.setText(Integer.toString((int)logValue));
+				//set current value as text, a bit more human readable
+				String numberAsString = decimalFormat.format(logValue);
+				labelCurrentValue.setText(numberAsString);
+
+				//set current value to builder
+				diceBuilder.setNbExperience(logValue);
 				}
+
+			DecimalFormat decimalFormat = new DecimalFormat("#,##0");
 			});
 		}
 
@@ -89,14 +93,18 @@ public class JLogScaleSlider extends Box
 		{
 		//set the logaritmic scale labels
 		Dictionary<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
+		NumberFormat formatter = new DecimalFormat("0.##E0");	//allow for compact display of big numbers
 		for(int i = 0; i <= this.scale; i++)
 			{
 			int scaledValue = (int)Math.pow(base, i);
-			labelTable.put(i * TICK_PRECISION, new JLabel(Integer.toString(scaledValue)));
+			labelTable.put(i * TICK_PRECISION, new JLabel(formatter.format(scaledValue)));
 			}
 		slider.setLabelTable(labelTable);
 		slider.setPaintLabels(true);
 		slider.setPaintTicks(true);
+
+		//set initial value to builder
+		diceBuilder.setNbExperience(1);
 
 		}
 
@@ -112,6 +120,7 @@ public class JLogScaleSlider extends Box
 	// Tools
 	private JSlider slider;
 	private JLabel labelCurrentValue;
+	DiceBuilder diceBuilder;
 
 	private static final int TICK_PRECISION = 100;
 

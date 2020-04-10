@@ -15,6 +15,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import ch.hearc.tools.DiceBuilder;
+
 public class JRangeIntegerSpinbox extends JPanel
 	{
 
@@ -22,7 +24,7 @@ public class JRangeIntegerSpinbox extends JPanel
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JRangeIntegerSpinbox(String title, String descMinSpinner, String descMaxspinner, int min, int max)
+	public JRangeIntegerSpinbox(String title, String descMinSpinner, String descMaxspinner, int min, int max, DiceBuilder diceBuilder)
 		{
 		super();
 
@@ -31,19 +33,12 @@ public class JRangeIntegerSpinbox extends JPanel
 		this.title = title;
 		this.min = min;
 		this.max = max;
+		this.diceBuilder = diceBuilder;
 
 		geometry();
 		control();
 		appearance();
 		}
-
-	/*------------------------------------------------------------------*\
-	|*							Methodes Public							*|
-	\*------------------------------------------------------------------*/
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -83,10 +78,13 @@ public class JRangeIntegerSpinbox extends JPanel
 		gridLayout.setVgap(5);
 
 		//set the padding + external border with title inside the box
-		Border lineBorder = BorderFactory.createLineBorder(Color.black);
+		Border lineBorder = BorderFactory.createLineBorder(Color.BLACK);
 		Border outsideBorder = BorderFactory.createTitledBorder(lineBorder, title, TitledBorder.CENTER, TitledBorder.BELOW_TOP);
 		Border marginBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		this.setBorder(BorderFactory.createCompoundBorder(outsideBorder, marginBorder));
+
+		//set initial value to builder
+		diceBuilder.setInterval(min, max);
 		}
 
 	/*
@@ -115,26 +113,31 @@ public class JRangeIntegerSpinbox extends JPanel
 				int spinMinValue = (int)spinMin.getValue();
 				int spinMaxValue = (int)spinMax.getValue();
 
+				diceBuilder.setInterval(spinMinValue, spinMaxValue);
+
 				//Juste a little security verifivation
 				if (spinMinValue < min)
 					{
 					spinMin.setValue(min);
+					diceBuilder.setMin(min);
 					}
 
 				//UI : We want the min spinner to never be above the max one
 				//we take action if it is the case
-				if (spinMinValue >= spinMaxValue)
+				if (spinMinValue > spinMaxValue)
 					{
 
-					// '<' because we need at least "1" room for the max spinner value
-					if (spinMinValue < max)
+					// '<=' because we can have both spinner at max value
+					if (spinMinValue <= max)
 						{
-						spinMax.setValue(spinMinValue + 1);
+						spinMax.setValue(spinMinValue);
+						diceBuilder.setMax(spinMinValue);
 						}
 					else //user tries to go too far : stop the action, go to max
 						{
-						spinMin.setValue(max - 1);
+						spinMin.setValue(max);
 						spinMax.setValue(max);
+						diceBuilder.setInterval(max, max);
 						}
 
 					}
@@ -159,26 +162,31 @@ public class JRangeIntegerSpinbox extends JPanel
 				int spinMinValue = (int)spinMin.getValue();
 				int spinMaxValue = (int)spinMax.getValue();
 
+				diceBuilder.setInterval(spinMinValue, spinMaxValue);
+
 				//Juste a little security verifivation
 				if (spinMaxValue > max)
 					{
 					spinMax.setValue(max);
+					diceBuilder.setMax(max);
 					}
 
 				//UI : We want the max spinner to always be above the min one
 				//we take action if it is not the case
-				if (spinMaxValue <= spinMinValue)
+				if (spinMaxValue < spinMinValue)
 					{
 
-					// '<' because we need at least "1" room for the max spinner value
-					if (spinMaxValue > min)
+					// '>=' because we can have both spinner at min value
+					if (spinMaxValue >= min)
 						{
-						spinMin.setValue(spinMaxValue - 1);
+						spinMin.setValue(spinMaxValue);
+						diceBuilder.setMin(spinMaxValue);
 						}
 					else //user tries to go too far : stop the action, go to max
 						{
-						spinMax.setValue(min + 1);
+						spinMax.setValue(min);
 						spinMin.setValue(min);
+						diceBuilder.setInterval(min, min);
 						}
 
 					}
@@ -197,6 +205,7 @@ public class JRangeIntegerSpinbox extends JPanel
 	private int min;
 	private int max;
 	private String title;
+	private DiceBuilder diceBuilder;
 
 	// Tools
 	private JSpinner spinMin;

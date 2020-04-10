@@ -2,6 +2,8 @@
 package ch.hearc.dice.gui.menu;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -11,6 +13,9 @@ import javax.swing.JRadioButton;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import ch.hearc.dice.moo.implementation.dice.TypeProcessing;
+import ch.hearc.tools.DiceBuilder;
+
 public class JProcessingChoice extends Box
 	{
 
@@ -18,9 +23,11 @@ public class JProcessingChoice extends Box
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JProcessingChoice()
+	public JProcessingChoice(DiceBuilder diceBuilder)
 		{
 		super(BoxLayout.Y_AXIS);
+
+		this.diceBuilder = diceBuilder;
 
 		geometry();
 		control();
@@ -62,7 +69,22 @@ public class JProcessingChoice extends Box
 
 	private void control()
 		{
-		// rien
+		radioButtonSequential.addActionListener(createActionListenerProcessing(TypeProcessing.SEQUENTIEL));
+		radioButtonParallel.addActionListener(createActionListenerProcessing(TypeProcessing.PARALLELE));
+		radioButtonRunnable.addActionListener(createActionListenerProcessing(TypeProcessing.RUNNABLE));
+		}
+
+	private ActionListener createActionListenerProcessing(TypeProcessing typeProcessing)
+		{
+		return new ActionListener()
+			{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+				{
+				diceBuilder.setTypeProcessing(typeProcessing);
+				}
+			};
 		}
 
 	private void appearance()
@@ -70,11 +92,11 @@ public class JProcessingChoice extends Box
 		//set the padding + external border with title inside the box
 		Border lineBorder = BorderFactory.createLineBorder(Color.BLACK);
 		Border outsideBorder = BorderFactory.createTitledBorder(lineBorder, "Processing method", TitledBorder.CENTER, TitledBorder.BELOW_TOP);
-
 		Border marginBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		this.setBorder(BorderFactory.createCompoundBorder(outsideBorder, marginBorder));
 
 		radioButtonSequential.setSelected(true);
+		diceBuilder.setTypeProcessing(TypeProcessing.SEQUENTIEL);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -82,6 +104,7 @@ public class JProcessingChoice extends Box
 	\*------------------------------------------------------------------*/
 
 	// Inputs
+	DiceBuilder diceBuilder;
 
 	// Tools
 	private JRadioButton radioButtonSequential;

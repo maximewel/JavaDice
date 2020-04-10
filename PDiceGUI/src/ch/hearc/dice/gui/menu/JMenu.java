@@ -3,13 +3,22 @@ package ch.hearc.dice.gui.menu;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import ch.hearc.c_gui.tools.JCenterH;
 import ch.hearc.c_gui.tools.JComponents;
+import ch.hearc.dice.moo.specifications.DiceVariable_I;
+import ch.hearc.dice.tools.ImageShop;
+import ch.hearc.tools.DiceBuilder;
+import ch.hearc.tools.IterationEvent;
+import ch.hearc.tools.IterationListener_I;
 
 public class JMenu extends Box
 	{
@@ -21,6 +30,9 @@ public class JMenu extends Box
 	public JMenu()
 		{
 		super(BoxLayout.Y_AXIS);
+
+		//important : builder is necessary during creation of components - do it before anything else
+		diceBuilder = new DiceBuilder();
 
 		geometry();
 		control();
@@ -71,11 +83,9 @@ public class JMenu extends Box
 		this.add(Box.createVerticalGlue());
 		this.add(new JCenterH(sliderTitled));
 
-		//stop and kill buttons, relative to current process
+		//start/stop/kill buttons, relative to current process
 		this.add(Box.createVerticalGlue());
-		this.add(new JCenterH(buttonStop));
-		this.add(JMenu.createVSpacing());
-		this.add(new JCenterH(buttonKill));
+		this.add(new JCenterH(buttonline));
 
 		//quit button, at the end
 		this.add(Box.createVerticalGlue());
@@ -84,38 +94,121 @@ public class JMenu extends Box
 
 	private void control()
 		{
+		//quit button
+		buttonQuit.addActionListener(new ActionListener()
+			{
 
+			@Override
+			public void actionPerformed(ActionEvent e)
+				{
+				System.exit(0); // 0 normal
+				}
+			});
+
+		//start button
+		buttonStart.addActionListener(new ActionListener()
+			{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+				{
+				diceVariable = diceBuilder.build();
+				diceVariable.addIterationListener(createIterationListener());
+
+				diceThread = new Thread(diceVariable);
+				diceThread.start();
+
+				buttonline.switchButtonEnabled();
+				}
+
+			});
+
+		//stop button
+		buttonStart.addActionListener(new ActionListener()
+			{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+				{
+				//diceVariable.stop();
+				//buttonline.switchButtonEnabled();
+				}
+			});
+
+		//kill button
+		buttonKill.addActionListener(new ActionListener()
+			{
+
+			@SuppressWarnings("deprecation") //stop is depreciated, we never use it normally (see - PConc courses)
+			@Override
+			public void actionPerformed(ActionEvent e)
+				{
+				diceThread.stop();
+				buttonline.switchButtonEnabled();
+				}
+			});
 		}
 
 	private void appearance()
 		{
-		//UI helper for the user, as stop and kill might seem obscure
+		//UI helper for the user, as start, stop and kill might seem obscure
+		buttonStart.setToolTipText("Start the process experience with given parameters");
 		buttonStop.setToolTipText("Gracefully stop the computing");
 		buttonKill.setToolTipText("Brutally stop the computing");
+
+		buttonStart.setEnabled(true); //useless, just to be sure
+		buttonStop.setEnabled(false);
+		buttonKill.setEnabled(false);
 
 		standardizeComponentSizes();
 		}
 
-	private static JButton createStandardButton(String text)
+	private static JButton createStandardButton(String text, Image img)
 		{
 		JButton button = new JButton(text);
 		button.setPreferredSize(new Dimension(BUTTON_WIDTH, button.getPreferredSize().height));
+
+		//resize the icon to fit inside the button (Height), let the width be determined auto
+		int iconHeight = (int)(BUTTON_ICON_HEIGHT_RATIO * button.getPreferredSize().height);
+		Image newimg = img.getScaledInstance(-1, iconHeight, Image.SCALE_SMOOTH);
+		ImageIcon icon = new ImageIcon(newimg);
+		button.setIcon(icon);
+
 		return button;
+		}
+
+	private IterationListener_I createIterationListener()
+		{
+		return new IterationListener_I()
+			{
+
+			@Override
+			public void iterationPerformed(IterationEvent it)
+				{
+				System.out.println("Algo " + it.getI());
+				System.out.println("  State : " + it.getEtatAlgo().toString());
+				}
+			};
 		}
 
 	/**
 	 * Little helper function, initialize all components
 	 * Must be called before any operation on tools
+	 * avoid congestion of geometry()
 	 */
 	private void initializeComponents()
 		{
 		labelTitle = new JLabelTitle("Menu");
-		processingChoice = new JProcessingChoice();
-		rangeIntegerSpinbox = new JRangeIntegerSpinbox("Dice faces choice", "Minimun faces : ", "Maximum faces :", 0, 10);
-		sliderTitled = new JLogScaleSlider("Number of experiences", BASE, SCALE_BASE_10);
-		buttonStop = createStandardButton("Stop");
-		buttonKill = createStandardButton("Kill");
-		buttonQuit = createStandardButton("Quit");
+		processingChoice = new JProcessingChoice(diceBuilder);
+		rangeIntegerSpinbox = new JRangeIntegerSpinbox("Dice faces choice", "Minimun faces : ", "Maximum faces :", 0, 10, diceBuilder);
+		sliderTitled = new JLogScaleSlider("Number of experiences", BASE, SCALE_BASE_10, diceBuilder);
+
+		buttonStart = createStandardButton("Start", ImageShop.START_ICON.getImage());
+		buttonStop = createStandardButton("Stop", ImageShop.STOP_ICON.getImage());
+		buttonKill = createStandardButton("Kill", ImageShop.KILL_ICON.getImage());
+		buttonline = new JButtonLine(buttonStart, buttonStop, buttonKill);
+
+		buttonQuit = createStandardButton("Quit", ImageShop.EXIT_ICON.getImage());
 		}
 
 	private void standardizeComponentSizes()
@@ -123,6 +216,7 @@ public class JMenu extends Box
 		JComponents.setWidth(processingChoice, COMPONENT_WIDTH);
 		JComponents.setWidth(rangeIntegerSpinbox, COMPONENT_WIDTH);
 		JComponents.setWidth(sliderTitled, COMPONENT_WIDTH);
+		JComponents.setWidth(buttonline, COMPONENT_WIDTH);
 		}
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
@@ -135,19 +229,27 @@ public class JMenu extends Box
 	private JLabelTitle labelTitle;
 	private JProcessingChoice processingChoice;
 	private JRangeIntegerSpinbox rangeIntegerSpinbox;
+	private JLogScaleSlider sliderTitled;
+	private JButtonLine buttonline;
+	private JButton buttonStart;
 	private JButton buttonStop;
 	private JButton buttonKill;
 	private JButton buttonQuit;
-	private JLogScaleSlider sliderTitled;
+
+	//builder pattern, dice related objects
+	private DiceBuilder diceBuilder;
+	private DiceVariable_I diceVariable;
+	private Thread diceThread;
 
 	//general standardisation of UI
 	private static final int SPACING = 10;
 	private static final int BUTTON_WIDTH = 100;
 	private static final int COMPONENT_WIDTH = 350;
+	private static final double BUTTON_ICON_HEIGHT_RATIO = 0.7;
 
 	//avoid magic numbers
 	private static final int BASE = 10;
-	private static final int MAX_NUMBER_EXPERIENCE = 1000000;
-	private static final int SCALE_BASE_10 = (int)Math.log10(MAX_NUMBER_EXPERIENCE);
+	private static final int MAX_NUMBER_EXPERIENCE = 1000000000;
+	private static final int SCALE_BASE_10 = (int)Math.ceil(Math.log10(MAX_NUMBER_EXPERIENCE));
 
 	}
