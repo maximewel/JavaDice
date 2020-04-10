@@ -2,7 +2,7 @@
 package ch.hearc.tools;
 
 import ch.hearc.b_poo.thread.vecteur.Interval;
-import ch.hearc.dice.moo.implementation.dice.TypeProcessing;
+import ch.hearc.dice.moo.implementation.TypeProcessing;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
 import ch.hearc.dice.moo.specifications.FactoryDiceVariable;
 

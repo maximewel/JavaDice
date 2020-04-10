@@ -13,7 +13,7 @@ import javax.swing.JRadioButton;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import ch.hearc.dice.moo.implementation.dice.TypeProcessing;
+import ch.hearc.dice.moo.implementation.TypeProcessing;
 import ch.hearc.tools.DiceBuilder;
 
 public class JProcessingChoice extends Box
