@@ -1,5 +1,5 @@
 
-package ch.hearc.dice.moo.implementation.dice;
+package ch.hearc.dice.moo.implementation;
 
 import java.util.ArrayList;
 import java.util.List;

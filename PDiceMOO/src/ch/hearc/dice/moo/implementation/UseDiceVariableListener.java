@@ -1,5 +1,5 @@
 
-package ch.hearc.dice.moo.implementation.dice;
+package ch.hearc.dice.moo.implementation;
 
 import ch.hearc.b_poo.thread.vecteur.Interval;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;

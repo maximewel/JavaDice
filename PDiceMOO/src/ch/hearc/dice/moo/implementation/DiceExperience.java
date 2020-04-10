@@ -1,4 +1,4 @@
-package ch.hearc.dice.moo.implementation.dice;
+package ch.hearc.dice.moo.implementation;
 
 import java.util.HashSet;
 import java.util.Set;

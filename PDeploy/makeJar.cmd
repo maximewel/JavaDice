@@ -3,7 +3,8 @@
 set PATH_7Z=C:\Soft\sevenZip
 set PATH=%PATH%;%PATH_7z%
 
-7z a -tzip Deploy/PCoursJava.jar ../PCoursJava/bin/ch
+7z a -tzip Deploy/PDiceMOO.jar ../PDiceMOO/bin/ch
+7z a -tzip Deploy/PDiceGUI.jar ../PDiceGUI/bin/ch
 
 echo.
 echo ----------
