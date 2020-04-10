@@ -79,7 +79,7 @@ public class JRangeIntegerSpinbox extends JPanel
 
 		//set the padding + external border with title inside the box
 		Border lineBorder = BorderFactory.createLineBorder(Color.BLACK);
-		Border outsideBorder = BorderFactory.createTitledBorder(lineBorder, title, TitledBorder.CENTER, TitledBorder.BELOW_TOP);
+		Border outsideBorder = BorderFactory.createTitledBorder(lineBorder, title, TitledBorder.CENTER, TitledBorder.TOP);
 		Border marginBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		this.setBorder(BorderFactory.createCompoundBorder(outsideBorder, marginBorder));
 

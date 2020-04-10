@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -15,8 +14,10 @@ import javax.swing.JButton;
 
 import ch.hearc.c_gui.tools.JCenterH;
 import ch.hearc.c_gui.tools.JComponents;
+import ch.hearc.dice.gui.result.JResult;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
 import ch.hearc.dice.tools.ImageShop;
+import ch.hearc.tools.AlgoIteratif_A;
 import ch.hearc.tools.DiceBuilder;
 import ch.hearc.tools.EtatAlgo;
 import ch.hearc.tools.IterationEvent;
@@ -29,9 +30,11 @@ public class JMenu extends Box
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JMenu()
+	public JMenu(JResult jResult)
 		{
 		super(BoxLayout.Y_AXIS);
+
+		this.jResult = jResult;
 
 		//important : builder is necessary during creation of components - do it before anything else
 		diceBuilder = new DiceBuilder();
@@ -96,8 +99,6 @@ public class JMenu extends Box
 
 	private void control()
 		{
-		doStop = new AtomicBoolean(false); //at first, we want the algo to be able to run
-
 		//quit button
 		buttonQuit.addActionListener(new ActionListener()
 			{
@@ -116,9 +117,14 @@ public class JMenu extends Box
 			@Override
 			public void actionPerformed(ActionEvent e)
 				{
+				//ask builder to build the dice, using the factory
+				//the builder is used to set and save all the parameters and link the user to the factory
 				diceVariable = diceBuilder.build();
+				//iteration listener used to know when to switch the buttons again
 				diceVariable.addIterationListener(createIterationListener());
-				doStop.set(false);
+
+				//tell the result page to update according to the new dice
+				jResult.refreshExperience(diceVariable);
 
 				diceThread = new Thread(diceVariable);
 				diceThread.start();
@@ -135,7 +141,10 @@ public class JMenu extends Box
 			@Override
 			public void actionPerformed(ActionEvent e)
 				{
-				doStop.set(true);
+				if (algoIteratif != null)
+					{ //some security
+					algoIteratif.stop();
+					}
 				}
 			});
 
@@ -143,11 +152,12 @@ public class JMenu extends Box
 		buttonKill.addActionListener(new ActionListener()
 			{
 
-			@SuppressWarnings("deprecation") //stop is depreciated, we never use it normally (see - PConc courses)
+			@SuppressWarnings("deprecation") //stop is depreciated, we never use it normally (see PConc courses)
 			@Override
 			public void actionPerformed(ActionEvent e)
 				{
 				diceThread.stop();
+				jResult.experienceKilled();
 				buttonline.switchButtonEnabled();
 				}
 			});
@@ -191,12 +201,14 @@ public class JMenu extends Box
 				{
 				System.out.println("Algo " + it.getI());
 				System.out.println("  State : " + it.getEtatAlgo().toString());
-				if (doStop.get())
+				//get algo at beggining
+				if (it.getEtatAlgo() == EtatAlgo.BEGIN)
 					{
-					it.getAlgoIteratif().stop();
+					algoIteratif = it.getAlgoIteratif();
 					}
 				if (it.getEtatAlgo() == EtatAlgo.END)
 					{
+					algoIteratif = null; //can't be used anymore
 					buttonline.switchButtonEnabled();
 					}
 				}
@@ -235,6 +247,7 @@ public class JMenu extends Box
 	\*------------------------------------------------------------------*/
 
 	// Inputs
+	JResult jResult;
 
 	// Tools
 	//components
@@ -251,8 +264,8 @@ public class JMenu extends Box
 	//builder pattern, dice related objects
 	private DiceBuilder diceBuilder;
 	private DiceVariable_I diceVariable;
+	private AlgoIteratif_A algoIteratif;
 	private Thread diceThread;
-	AtomicBoolean doStop;
 
 	//general standardisation of UI
 	private static final int SPACING = 10;

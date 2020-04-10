@@ -1,16 +1,20 @@
 
 package ch.hearc.dice.gui.menu;
 
+import java.awt.Color;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -51,15 +55,11 @@ public class JLogScaleSlider extends Box
 		//the tick value. as such, 0<->tickvalue on the slider => 0.0<->1.0 read.
 		slider = new JSlider(SwingConstants.HORIZONTAL, 0, scale * TICK_PRECISION, 0);
 
-		JLabel titleLabel = new JLabel(title);
-
 		Box boxCurrentValue = new Box(BoxLayout.X_AXIS);
 		labelCurrentValue = new JLabel("1");
 		boxCurrentValue.add(new JLabel("Current : "));
 		boxCurrentValue.add(labelCurrentValue);
 
-		this.add(new JCenterH(titleLabel));
-		this.add(JMenu.createVSpacing());
 		this.add(slider);
 		this.add(JMenu.createVSpacing());
 		this.add(new JCenterH(boxCurrentValue));
@@ -93,7 +93,7 @@ public class JLogScaleSlider extends Box
 		{
 		//set the logaritmic scale labels
 		Dictionary<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
-		NumberFormat formatter = new DecimalFormat("0.##E0");	//allow for compact display of big numbers
+		NumberFormat formatter = new DecimalFormat("0.##E0"); //allow for compact display of big numbers
 		for(int i = 0; i <= this.scale; i++)
 			{
 			int scaledValue = (int)Math.pow(base, i);
@@ -105,6 +105,12 @@ public class JLogScaleSlider extends Box
 
 		//set initial value to builder
 		diceBuilder.setNbExperience(1);
+
+		//set the padding + external border with title inside the box
+		Border lineBorder = BorderFactory.createLineBorder(Color.BLACK);
+		Border outsideBorder = BorderFactory.createTitledBorder(lineBorder, title, TitledBorder.CENTER, TitledBorder.TOP);
+		Border marginBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
+		this.setBorder(BorderFactory.createCompoundBorder(outsideBorder, marginBorder));
 
 		}
 

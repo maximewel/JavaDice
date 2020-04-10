@@ -1,15 +1,18 @@
-package ch.hearc.dice.gui.graph;
+
+package ch.hearc.dice.gui.result;
 
 import javax.swing.JPanel;
 
-public class JGraph extends JPanel
+import ch.hearc.dice.moo.specifications.DiceVariable_I;
+
+public class JResult extends JPanel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JGraph()
+	public JResult()
 		{
 		geometry();
 		control();
@@ -19,6 +22,16 @@ public class JGraph extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+
+	public void refreshExperience(DiceVariable_I diceVariable_I)
+		{
+		progressBars.refreshDice(diceVariable_I);
+		}
+
+	public void experienceKilled()
+		{
+		progressBars.experienceKilled();
+		}
 
 	/*------------------------------*\
 	|*				Get				*|
@@ -30,7 +43,11 @@ public class JGraph extends JPanel
 
 	private void geometry()
 		{
-		// TODO
+		progressBars = new JProgressBars("Experience running : ", "Current task advancement :");
+		graphes = new JGraphes();
+
+		this.add(graphes);
+		this.add(progressBars);
 		}
 
 	private void control()
@@ -50,6 +67,7 @@ public class JGraph extends JPanel
 	// Inputs
 
 	// Tools
-
+	private JProgressBars progressBars;
+	private JGraphes graphes;
 
 	}
