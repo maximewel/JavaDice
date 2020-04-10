@@ -29,6 +29,10 @@ public class IterationEvent
 		return this.etatAlgo;
 		}
 
+	public AlgoIteratif_A getAlgoIteratif() {
+		return source;
+	}
+
 	/*------------------------------*\
 	|*				Get				*|
 	\*------------------------------*/
