@@ -40,7 +40,8 @@ public class Dice implements Runnable
 
 		int i = 0;
 
-		for(i = 0; i < nbCores-1; i++)
+		// part > 0 if the nbExp is too small we do everything in one interval!
+		for(i = 0; i < nbCores-1 && part > 0; i++)
 			{
 			intervals.add(new Interval(part * i, part * (i + 1)));
 			}

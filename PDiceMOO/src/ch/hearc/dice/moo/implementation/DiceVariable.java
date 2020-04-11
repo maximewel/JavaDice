@@ -1,9 +1,8 @@
 
 package ch.hearc.dice.moo.implementation;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
 import ch.hearc.b_poo.thread.vecteur.Interval;
@@ -26,8 +25,6 @@ public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 		this.typeProcessing = type;
 		this.mapFaceLancer = new HashMap<Integer, Integer>();
 		this.mapChronoLancer = new HashMap<Integer, Chrono>();
-		this.dices = new ArrayList<Dice>();
-
 		}
 
 	/*------------------------------------------------------------------*\
@@ -37,29 +34,28 @@ public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 	@Override
 	public void onBegin()
 		{
-		this.dices.clear();
 		this.mapFaceLancer.clear();
 		this.mapChronoLancer.clear();
 
-		for(Integer i:nbFaces)
-			{
-			this.dices.add(new Dice(i, nbExperience, this.typeProcessing));
-			}
+
+		currNbFace = nbFaces.iterator();
 		}
 
 	@Override
 	public void iterationStep(int i)
 		{
+		Integer nbface = currNbFace.next();
 		Chrono chrono = new Chrono();
+		Dice dice = new Dice(nbface, nbExperience, this.typeProcessing);
 
 		chrono.start();
-		this.dices.get(i).run();
+		dice.run();
 		chrono.stop();
 
 		this.mapChronoLancer.put(i, chrono);
-		this.mapFaceLancer.put(i, this.dices.get(i).getNbLancerMoyen());
+		this.mapFaceLancer.put(i, dice.getNbLancerMoyen());
 
-		if (i+1 >= nbFaces.getB()-nbFaces.getA())
+		if (!currNbFace.hasNext())
 			{
 				this.stop();
 			}
@@ -116,7 +112,7 @@ public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 	//input
 	private Interval nbFaces;
 	private int nbExperience;
-	private List<Dice> dices;
+	private Iterator<Integer> currNbFace;
 	private TypeProcessing typeProcessing;
 
 	private Map<Integer, Integer> mapFaceLancer;
