@@ -25,7 +25,7 @@ public class JProcessingChoice extends Box
 
 	public JProcessingChoice(DiceBuilder diceBuilder)
 		{
-		super(BoxLayout.Y_AXIS);
+		super(BoxLayout.X_AXIS);
 
 		this.diceBuilder = diceBuilder;
 
@@ -57,13 +57,19 @@ public class JProcessingChoice extends Box
 		groupe.add(radioButtonParallel);
 		groupe.add(radioButtonRunnable);
 
-		add(JMenu.createVSpacing());
-		add(radioButtonSequential);
-		add(JMenu.createVSpacing());
-		add(radioButtonParallel);
-		add(JMenu.createVSpacing());
-		add(radioButtonRunnable);
-		add(JMenu.createVSpacing());
+		Box boxV = new Box(BoxLayout.Y_AXIS);
+
+		boxV.add(JMenu.createVSpacing());
+		boxV.add(radioButtonSequential);
+		boxV.add(JMenu.createVSpacing());
+		boxV.add(radioButtonParallel);
+		boxV.add(JMenu.createVSpacing());
+		boxV.add(radioButtonRunnable);
+		boxV.add(JMenu.createVSpacing());
+
+		this.add(Box.createHorizontalGlue());
+		this.add(boxV);
+		this.add(Box.createHorizontalGlue());
 
 		}
 
@@ -104,7 +110,7 @@ public class JProcessingChoice extends Box
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	DiceBuilder diceBuilder;
+	private DiceBuilder diceBuilder;
 
 	// Tools
 	private JRadioButton radioButtonSequential;

@@ -216,8 +216,8 @@ public class JMenu extends Box
 		}
 
 	/**
-	 * Little helper function, initialize all components
-	 * Must be called before any operation on tools
+	 * Initialize all components <br>
+	 * Must be called before any operation on tools <br>
 	 * avoid congestion of geometry()
 	 */
 	private void initializeComponents()
@@ -247,7 +247,7 @@ public class JMenu extends Box
 	\*------------------------------------------------------------------*/
 
 	// Inputs
-	JResult jResult;
+	private JResult jResult;
 
 	// Tools
 	//components
@@ -261,7 +261,7 @@ public class JMenu extends Box
 	private JButton buttonKill;
 	private JButton buttonQuit;
 
-	//builder pattern, dice related objects
+	//builder/factory pattern, dice related objects
 	private DiceBuilder diceBuilder;
 	private DiceVariable_I diceVariable;
 	private AlgoIteratif_A algoIteratif;

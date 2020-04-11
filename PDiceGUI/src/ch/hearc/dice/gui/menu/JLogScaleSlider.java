@@ -21,6 +21,16 @@ import javax.swing.event.ChangeListener;
 import ch.hearc.c_gui.tools.JCenterH;
 import ch.hearc.tools.DiceBuilder;
 
+/**
+ * <pre>
+ * JSlider on a logaritmic scale
+ *
+ * Base, Scale : Goes from 1 to base ^ scale
+ * Appearence : Put a tick every base^n for n in 0...scale
+ * <br>
+ * @author maxime.welcklen, Mendes Reis Steve
+ *
+ */
 public class JLogScaleSlider extends Box
 	{
 
@@ -49,10 +59,10 @@ public class JLogScaleSlider extends Box
 
 	private void geometry()
 		{
-		//init slider from 0 to scale
-		//tick precision is there to simulate a double value from the int slider :
+		//init slider from 0 to base^scale
+		//tick precision is there to simulate a double value from the integer slider :
 		//the value is multiplied by tickvalue on the slider. then when we read it, we divide it by
-		//the tick value. as such, 0<->tickvalue on the slider => 0.0<->1.0 read.
+		//the tick value. as such, 0<->tickvalue on the slider will be read as (0<->tickvalue)/tickvalue => 0.0<->1.0
 		slider = new JSlider(SwingConstants.HORIZONTAL, 0, scale * TICK_PRECISION, 0);
 
 		Box boxCurrentValue = new Box(BoxLayout.X_AXIS);
@@ -126,7 +136,7 @@ public class JLogScaleSlider extends Box
 	// Tools
 	private JSlider slider;
 	private JLabel labelCurrentValue;
-	DiceBuilder diceBuilder;
+	private DiceBuilder diceBuilder;
 
 	private static final int TICK_PRECISION = 100;
 

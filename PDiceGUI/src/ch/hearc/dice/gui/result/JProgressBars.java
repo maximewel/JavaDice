@@ -3,8 +3,11 @@ package ch.hearc.dice.gui.result;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -54,21 +57,34 @@ public class JProgressBars extends JPanel
 
 	private void geometry()
 		{
-		gridLayout = new GridLayout(2, 2);
+		gridLayout = new GridLayout(3, 2);
 		this.setLayout(gridLayout);
 
 		progressBarGlobal = new JProgressBar();
 		progressHSB = new JProgressHSB();
+		checkBoxHSB = new JCheckBox();
+		checkBoxHSB.setSelected(progressHSB.isHSBEnabled());
 
 		this.add(new JLabel(descTop));
 		this.add(progressBarGlobal);
 		this.add(new JLabel(descBot));
 		this.add(progressHSB);
+		this.add(new JLabel("HSB display : "));
+		this.add(checkBoxHSB);
+
 		}
 
 	private void control()
 		{
-		// rien
+		checkBoxHSB.addActionListener(new ActionListener()
+			{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+				{
+				progressHSB.setHSBEnabled(checkBoxHSB.isSelected());
+				}
+			});
 		}
 
 	private void appearance()
@@ -78,6 +94,9 @@ public class JProgressBars extends JPanel
 		Border outsideBorder = BorderFactory.createTitledBorder(lineBorder, "Processus execution", TitledBorder.CENTER, TitledBorder.TOP);
 		Border marginBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		this.setBorder(BorderFactory.createCompoundBorder(outsideBorder, marginBorder));
+
+		progressHSB.setStringPainted(true);
+		progressHSB.setString("Not started");
 
 		gridLayout.setHgap(5);
 		gridLayout.setVgap(5);
@@ -99,14 +118,17 @@ public class JProgressBars extends JPanel
 						int min = algoIteratif_A.getNbFaces().getA();
 						int max = algoIteratif_A.getNbFaces().getB();
 						progressHSB.getModel().setRangeProperties(0, 0, 0, max - min, true);
+						progressHSB.setString("0/" + progressHSB.getMaximum());
 						break;
 					case RUNNING:
 						//"1 +" because the first one is 0, and we start from 0
 						int current = 1 + iterationEvent.getI();
 						progressHSB.setValue(current);
+						progressHSB.setString(current + "/" + progressHSB.getMaximum());
 						break;
 					case END:
 						progressBarGlobal.setIndeterminate(false);
+						progressHSB.setString("Finished");
 						break;
 					default:
 						//should never happen
@@ -121,6 +143,7 @@ public class JProgressBars extends JPanel
 	public void experienceKilled()
 		{
 		progressBarGlobal.setIndeterminate(false);
+		progressHSB.setString("Killed");
 		}
 
 	/*------------------------------------------------------------------*\
@@ -135,6 +158,7 @@ public class JProgressBars extends JPanel
 	// Tools
 	private JProgressBar progressBarGlobal;
 	private JProgressHSB progressHSB;
+	private JCheckBox checkBoxHSB;
 
 	private GridLayout gridLayout;
 

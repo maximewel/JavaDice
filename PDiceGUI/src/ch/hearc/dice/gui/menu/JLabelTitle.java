@@ -8,6 +8,13 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
 
+/**
+ * <pre>
+ * just a fancy title label - encase the string within a 5x5 padding and a little black border
+ * <br>
+ * @author maxime.welcklen, Mendes Reis Steve
+ *
+ */
 public class JLabelTitle extends JLabel
 	{
 
@@ -20,30 +27,12 @@ public class JLabelTitle extends JLabel
 
 		super(text);
 
-		geometry();
-		control();
 		appearance();
 		}
 
 	/*------------------------------------------------------------------*\
-	|*							Methodes Public							*|
-	\*------------------------------------------------------------------*/
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
-	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
-
-	private void geometry()
-		{
-		}
-
-	private void control()
-		{
-		}
 
 	private void appearance()
 		{
@@ -54,13 +43,5 @@ public class JLabelTitle extends JLabel
 		Border marginBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		this.setBorder(BorderFactory.createCompoundBorder(outsideBorder, marginBorder));
 		}
-
-	/*------------------------------------------------------------------*\
-	|*							Attributs Private						*|
-	\*------------------------------------------------------------------*/
-
-	// Inputs
-
-	// Tools
 
 	}

@@ -15,6 +15,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import ch.hearc.c_gui.tools.JCenter;
 import ch.hearc.tools.DiceBuilder;
 
 public class JRangeIntegerSpinbox extends JPanel
@@ -56,10 +57,10 @@ public class JRangeIntegerSpinbox extends JPanel
 		this.setLayout(gridLayout);
 
 		//add components to grid pannel
-		this.add(new JLabel(descMinspinner));
-		this.add(spinMin);
-		this.add(new JLabel(descMaxspinner));
-		this.add(spinMax);
+		this.add(new JCenter(new JLabel(descMinspinner)));
+		this.add(new JCenter(spinMin));
+		this.add(new JCenter(new JLabel(descMaxspinner)));
+		this.add(new JCenter(spinMax));
 
 		}
 

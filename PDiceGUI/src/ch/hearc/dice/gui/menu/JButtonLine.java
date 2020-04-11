@@ -7,6 +7,16 @@ import javax.swing.JButton;
 
 import ch.hearc.c_gui.tools.JCenter;
 
+/**
+ *<pre>
+ *JButtonLine
+ *
+ *Form a line of already created buttons (any given number)
+ *Buttons are spaced evenly-between each one
+ * <br>
+ * @author maxime.welcklen, Mendes Reis Steve
+ *
+ */
 public class JButtonLine extends Box
 	{
 
@@ -29,6 +39,9 @@ public class JButtonLine extends Box
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
+	/**
+	 * Toggle all buttons [on]<->[off]
+	 */
 	public void switchButtonEnabled()
 		{
 		for(JButton button:buttons)
@@ -36,11 +49,6 @@ public class JButtonLine extends Box
 			button.setEnabled(!button.isEnabled());
 			}
 		}
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
