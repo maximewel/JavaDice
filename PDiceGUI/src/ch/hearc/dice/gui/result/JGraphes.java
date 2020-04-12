@@ -1,6 +1,8 @@
+
 package ch.hearc.dice.gui.result;
 
-import javax.swing.JPanel;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 
 import ch.hearc.dice.gui.graph.JGrapheChrono;
 import ch.hearc.dice.gui.graph.JGrapheLancerMoyen;
@@ -8,7 +10,7 @@ import ch.hearc.dice.moo.specifications.DiceVariable_I;
 import ch.hearc.tools.IterationEvent;
 import ch.hearc.tools.IterationListener_I;
 
-public class JGraphes extends JPanel
+public class JGraphes extends Box
 	{
 
 	/*------------------------------------------------------------------*\
@@ -17,6 +19,7 @@ public class JGraphes extends JPanel
 
 	public JGraphes()
 		{
+		super(BoxLayout.Y_AXIS);
 		geometry();
 		control();
 		appearance();
@@ -25,10 +28,11 @@ public class JGraphes extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
-	public void refreshResults(DiceVariable_I diceVar) {
+	public void refreshResults(DiceVariable_I diceVar)
+		{
 		this.diceVar = diceVar;
 		updateListener();
-	}
+		}
 
 	/*------------------------------*\
 	|*				Get				*|
@@ -44,13 +48,13 @@ public class JGraphes extends JPanel
 		graphChrono = new JGrapheChrono();
 
 		add(graphNbLancer);
+		add(Box.createVerticalGlue());
 		add(graphChrono);
 
 		}
 
 	private void control()
 		{
-		// rien
 		}
 
 	private void appearance()
@@ -62,11 +66,12 @@ public class JGraphes extends JPanel
 		{
 		diceVar.addIterationListener(new IterationListener_I()
 			{
+
 			@Override
 			public void iterationPerformed(IterationEvent iterationEvent)
 				{
-					graphNbLancer.updateData(iterationEvent.getAlgoIteratif().getMapFaceLancer());
-					graphChrono.updateData(iterationEvent.getAlgoIteratif().getMapFaceChrono());
+				graphNbLancer.updateData(iterationEvent.getAlgoIteratif().getMapFaceLancer());
+				graphChrono.updateData(iterationEvent.getAlgoIteratif().getMapFaceChrono());
 				}
 			});
 		}
@@ -80,10 +85,8 @@ public class JGraphes extends JPanel
 	private JGrapheChrono graphChrono;
 	private DiceVariable_I diceVar;
 
-
 	// Tools
 
 	//output
-
 
 	}

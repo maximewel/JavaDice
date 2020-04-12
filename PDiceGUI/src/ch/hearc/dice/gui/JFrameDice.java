@@ -6,7 +6,6 @@ import java.awt.Frame;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 
 import ch.hearc.c_gui.tools.JMarge;
 import ch.hearc.dice.tools.ImageShop;
@@ -37,8 +36,7 @@ public class JFrameDice extends JFrame
 
 		//add component with a slight margin, inside a scrollpane (same as contentpane, but with scrollbars, yay)
 		add(new JHeader(), BorderLayout.NORTH);
-		JScrollPane scrollPane = new JScrollPane(component);
-		add(new JMarge(scrollPane, 10, 10), BorderLayout.CENTER);
+		add(new JMarge(component, 10, 10), BorderLayout.CENTER);
 		}
 
 	private void control()

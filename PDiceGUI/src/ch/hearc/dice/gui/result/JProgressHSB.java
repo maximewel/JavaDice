@@ -140,6 +140,8 @@ public class JProgressHSB extends JProgressBar
 		{
 		int w = getWidth();
 		int h = getHeight();
+		if (w <= 0 || h <= 0)
+			{ return; }
 		bImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
 		//draw the exterior border

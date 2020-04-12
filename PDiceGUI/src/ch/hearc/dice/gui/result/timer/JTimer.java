@@ -16,8 +16,6 @@ public class JTimer extends JPanel
 
 	public JTimer()
 		{
-		//super(BoxLayout.Y_AXIS);
-
 		geometry();
 		control();
 		appearance();

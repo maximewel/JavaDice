@@ -111,6 +111,7 @@ public class JTimerClock extends JPanel
 			@Override
 			public void componentResized(ComponentEvent e)
 				{
+				super.componentResized(e);
 				updateSize();
 				}
 			});
@@ -131,7 +132,7 @@ public class JTimerClock extends JPanel
 
 	private void updateSize()
 		{
-		int squareSize = Math.max(getWidth(), getHeight());
+		int squareSize = Math.min(getWidth(), getHeight());
 
 		dial = new Ellipse2D.Double(-squareSize / 4, -squareSize / 4, squareSize / 2, squareSize / 2);
 

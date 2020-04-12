@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
 import ch.hearc.c_gui.tools.JComponents;
@@ -49,14 +50,13 @@ public class JDice extends JPanel
 		menu = new JMenu(result);
 
 		//init split pane with the two components
-		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, menu, result);
+		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(menu), /*new JScrollPane(result)*/ result);
 		this.add(splitPane);
 
 		}
 
 	private void control()
 		{
-		// rien
 		}
 
 	private void appearance()
@@ -70,8 +70,6 @@ public class JDice extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
-
-	// Inputs
 
 	// Tools
 	private JSplitPane splitPane;
