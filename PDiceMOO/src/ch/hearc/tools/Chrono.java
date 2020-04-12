@@ -11,6 +11,7 @@ public class Chrono
 		{
 		start();
 		}
+
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
@@ -26,7 +27,7 @@ public class Chrono
 		long endTime = System.nanoTime();
 		this.isStopped = true;
 
-		this.timeMS = (endTime-startTime)/1000000; // nano to seconds
+		this.timeMS = (endTime - startTime) / 1000000; // nano to seconds
 
 		return this.timeMS;
 		}
@@ -42,9 +43,12 @@ public class Chrono
 	\*------------------------------*/
 	public long getTimeMS()
 		{
-		if (isStopped) return this.timeMS;
+		if (isStopped)
+			{
+				return this.timeMS;
+				}
 
-		return (System.nanoTime()-startTime)/1000000; //nano to seconds
+		return (System.nanoTime() - startTime) / 1000000; //nano to seconds
 		}
 
 	/*------------------------------------------------------------------*\

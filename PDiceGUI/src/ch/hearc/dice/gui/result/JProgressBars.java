@@ -122,13 +122,20 @@ public class JProgressBars extends JPanel
 						break;
 					case RUNNING:
 						//"1 +" because the first one is 0, and we start from 0
-						int current = 1 + iterationEvent.getI();
-						progressHSB.setValue(current);
-						progressHSB.setString(current + "/" + progressHSB.getMaximum());
+						step = 1 + iterationEvent.getI();
+						progressHSB.setValue(step);
+						progressHSB.setString(step + "/" + progressHSB.getMaximum());
 						break;
 					case END:
 						progressBarGlobal.setIndeterminate(false);
-						progressHSB.setString("Finished");
+						if (step == progressHSB.getMaximum())
+							{
+							progressHSB.setString("Finished");
+							}
+						else
+							{
+							progressHSB.setString("Stopped");
+							}
 						break;
 					default:
 						//should never happen
@@ -137,6 +144,7 @@ public class JProgressBars extends JPanel
 				}
 
 			AlgoIteratif_A algoIteratif_A;
+			int step;
 			});
 		}
 

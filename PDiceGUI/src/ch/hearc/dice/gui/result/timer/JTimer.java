@@ -1,20 +1,23 @@
 
-package ch.hearc.dice.gui.result;
+package ch.hearc.dice.gui.result.timer;
+
+import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
-import ch.hearc.dice.gui.result.timer.JTimer;
-import ch.hearc.dice.moo.specifications.DiceVariable_I;
+import ch.hearc.c_gui.tools.JCenterH;
 
-public class JResult extends JPanel
+public class JTimer extends JPanel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JResult()
+	public JTimer()
 		{
+		//super(BoxLayout.Y_AXIS);
+
 		geometry();
 		control();
 		appearance();
@@ -24,14 +27,17 @@ public class JResult extends JPanel
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void refreshExperience(DiceVariable_I diceVariable_I)
+	public void start()
 		{
-		progressBars.refreshDice(diceVariable_I);
+		if (!tickThread.isAlive())
+			{
+			tickThread.start();
+			}
 		}
 
-	public void experienceKilled()
+	public void stop()
 		{
-		progressBars.experienceKilled();
+		runnableTimer.stop();
 		}
 
 	/*------------------------------*\
@@ -44,13 +50,15 @@ public class JResult extends JPanel
 
 	private void geometry()
 		{
-		progressBars = new JProgressBars("Experience running : ", "Current task advancement :");
-		graphes = new JGraphes();
-		timer = new JTimer();
+		this.setLayout(new BorderLayout());
 
-		this.add(graphes);
-		this.add(progressBars);
-		this.add(timer);
+		timerClock = new JTimerClock();
+		timerDigit = new JTimerDigit();
+
+		initThread();
+
+		this.add(timerClock, BorderLayout.CENTER);
+		this.add(new JCenterH(timerDigit), BorderLayout.SOUTH);
 		}
 
 	private void control()
@@ -63,6 +71,12 @@ public class JResult extends JPanel
 		// rien
 		}
 
+	private void initThread()
+		{
+		runnableTimer = new RunnableTimer(timerClock, timerDigit);
+		tickThread = new Thread(runnableTimer);
+		}
+
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
@@ -70,8 +84,10 @@ public class JResult extends JPanel
 	// Inputs
 
 	// Tools
-	private JProgressBars progressBars;
-	private JGraphes graphes;
-	private JTimer timer;
+	private JTimerClock timerClock;
+	private JTimerDigit timerDigit;
+
+	private Thread tickThread;
+	private RunnableTimer runnableTimer;
 
 	}

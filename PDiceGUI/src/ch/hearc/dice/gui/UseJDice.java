@@ -18,7 +18,7 @@ public class UseJDice
 	public static void main()
 		{
 		String looknFeelName = "javax.swing.plaf.nimbus.NimbusLookAndFeel";
-		// Set cross-platform Java L&F (also called "Metal")
+		// Set cross-platform Java L&F
 		try
 			{
 			UIManager.setLookAndFeel(looknFeelName);

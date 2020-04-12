@@ -1,19 +1,16 @@
 
-package ch.hearc.dice.gui.result;
+package ch.hearc.dice.gui.result.timer;
 
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 
-import ch.hearc.dice.gui.result.timer.JTimer;
-import ch.hearc.dice.moo.specifications.DiceVariable_I;
-
-public class JResult extends JPanel
+public class JTimerDigit extends JLabel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JResult()
+	public JTimerDigit()
 		{
 		geometry();
 		control();
@@ -24,14 +21,9 @@ public class JResult extends JPanel
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
 
-	public void refreshExperience(DiceVariable_I diceVariable_I)
+	public void setTime(int h, int m, int s)
 		{
-		progressBars.refreshDice(diceVariable_I);
-		}
-
-	public void experienceKilled()
-		{
-		progressBars.experienceKilled();
+		this.setText(h + ":" + m + ":" + s);
 		}
 
 	/*------------------------------*\
@@ -44,13 +36,7 @@ public class JResult extends JPanel
 
 	private void geometry()
 		{
-		progressBars = new JProgressBars("Experience running : ", "Current task advancement :");
-		graphes = new JGraphes();
-		timer = new JTimer();
-
-		this.add(graphes);
-		this.add(progressBars);
-		this.add(timer);
+		// TODO
 		}
 
 	private void control()
@@ -70,8 +56,5 @@ public class JResult extends JPanel
 	// Inputs
 
 	// Tools
-	private JProgressBars progressBars;
-	private JGraphes graphes;
-	private JTimer timer;
 
 	}
