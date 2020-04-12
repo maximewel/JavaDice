@@ -26,7 +26,7 @@ public class UseDice
 		System.out.println("Please wait ...\n");
 
 		int nbFace = 6;
-		int nbExperience = Integer.MAX_VALUE / 1000; // Cette technique garantit de ne pas deborder le type int (Wrapper : plein de methodes utiles!)
+		int nbExperience = 2; // Cette technique garantit de ne pas deborder le type int (Wrapper : plein de methodes utiles!)
 
 		Dice dice = new Dice(nbFace, nbExperience, TypeProcessing.PARALLELE);
 		dice.run();

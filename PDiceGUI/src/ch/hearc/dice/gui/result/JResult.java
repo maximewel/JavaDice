@@ -1,6 +1,7 @@
 
 package ch.hearc.dice.gui.result;
 
+import javax.swing.Box;
 import javax.swing.JPanel;
 
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
@@ -26,6 +27,9 @@ public class JResult extends JPanel
 	public void refreshExperience(DiceVariable_I diceVariable_I)
 		{
 		progressBars.refreshDice(diceVariable_I);
+
+		graphes.refreshResults(diceVariable_I);
+
 		}
 
 	public void experienceKilled()
@@ -46,8 +50,11 @@ public class JResult extends JPanel
 		progressBars = new JProgressBars("Experience running : ", "Current task advancement :");
 		graphes = new JGraphes();
 
-		this.add(graphes);
 		this.add(progressBars);
+
+		this.add(Box.createVerticalGlue());
+
+		this.add(graphes);
 		}
 
 	private void control()

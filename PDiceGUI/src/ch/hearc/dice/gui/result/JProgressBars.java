@@ -106,7 +106,6 @@ public class JProgressBars extends JPanel
 		{
 		diceVariable_I.addIterationListener(new IterationListener_I()
 			{
-
 			@Override
 			public void iterationPerformed(IterationEvent iterationEvent)
 				{
