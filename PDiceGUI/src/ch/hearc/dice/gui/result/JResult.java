@@ -1,6 +1,7 @@
 
 package ch.hearc.dice.gui.result;
 
+import javax.swing.Box;
 import javax.swing.JPanel;
 
 import ch.hearc.dice.gui.result.timer.JTimer;
@@ -27,6 +28,9 @@ public class JResult extends JPanel
 	public void refreshExperience(DiceVariable_I diceVariable_I)
 		{
 		progressBars.refreshDice(diceVariable_I);
+
+		graphes.refreshResults(diceVariable_I);
+
 		}
 
 	public void experienceKilled()
@@ -48,9 +52,11 @@ public class JResult extends JPanel
 		graphes = new JGraphes();
 		timer = new JTimer();
 
-		this.add(graphes);
 		this.add(progressBars);
 		this.add(timer);
+
+		this.add(Box.createVerticalGlue());
+		this.add(graphes);
 		}
 
 	private void control()

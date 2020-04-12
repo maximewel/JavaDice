@@ -52,8 +52,8 @@ public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 		dice.run();
 		chrono.stop();
 
-		this.mapChronoLancer.put(i, chrono);
-		this.mapFaceLancer.put(i, dice.getNbLancerMoyen());
+		this.mapChronoLancer.put(nbFaces.getA() + i, chrono);
+		this.mapFaceLancer.put(nbFaces.getA() + i, dice.getNbLancerMoyen());
 
 		if (!currNbFace.hasNext())
 			{
@@ -71,7 +71,7 @@ public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 	@Override
 	public boolean isFinished(int i)
 		{
-		return this.mapFaceLancer.keySet().contains(i);
+		return this.mapFaceLancer.keySet().contains(nbFaces.getA() + i);
 		}
 
 	@Override

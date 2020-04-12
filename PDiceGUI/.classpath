@@ -9,5 +9,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/coursjavaTools.jar"/>
 	<classpathentry kind="lib" path="/PDeploy/Deploy/ressources.jar"/>
+	<classpathentry kind="lib" path="/PDeploy/Deploy/ext/jfreechart-1.5.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
