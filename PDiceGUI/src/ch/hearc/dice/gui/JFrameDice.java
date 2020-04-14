@@ -34,7 +34,7 @@ public class JFrameDice extends JFrame
 		BorderLayout borderLayout = new BorderLayout();
 		setLayout(borderLayout);
 
-		//add component with a slight margin, inside a scrollpane (same as contentpane, but with scrollbars, yay)
+		//add component with a slight margin, and header north
 		add(new JHeader(), BorderLayout.NORTH);
 		add(new JMarge(component, 10, 10), BorderLayout.CENTER);
 		}

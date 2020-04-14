@@ -1,14 +1,9 @@
 
 package ch.hearc.dice.gui.result;
 
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
-import ch.hearc.c_gui.tools.JComponents;
-import ch.hearc.dice.gui.menu.JMenu;
 import ch.hearc.dice.gui.result.timer.JTimer;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
 import ch.hearc.tools.IterationEvent;
@@ -61,40 +56,15 @@ public class JResult extends Box
 		progressBars = new JProgressBars("Experience running : ", "Current task advancement :");
 		graphes = new JGraphes();
 		timer = new JTimer();
+		progressLine = new JProgressLine(progressBars, timer);
 
+		this.add(progressLine);
 		this.add(graphes);
-		Box line = new Box(BoxLayout.X_AXIS);
-
-		line.add(Box.createHorizontalGlue());
-		line.add(progressBars);
-		line.add(JMenu.createHSpacing());
-		line.add(timer);
-		line.add(Box.createHorizontalGlue());
-
-		this.add(line);
 
 		}
 
 	private void control()
 		{
-		this.addComponentListener(new ComponentAdapter()
-			{
-
-			@Override
-			public void componentShown(ComponentEvent e)
-				{
-				JComponents.setWidth(timer, getWidth() / 3);
-				JComponents.setHeight(timer, timer.getWidth());
-				}
-
-			@Override
-			public void componentResized(ComponentEvent e)
-				{
-				JComponents.setWidth(timer, getWidth() / 3);
-				JComponents.setHeight(timer, timer.getWidth());
-				}
-
-			});
 		}
 
 	private void appearance()
@@ -137,4 +107,5 @@ public class JResult extends Box
 	private JProgressBars progressBars;
 	private JGraphes graphes;
 	private JTimer timer;
+	private JProgressLine progressLine;
 	}

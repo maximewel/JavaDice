@@ -27,8 +27,10 @@ public class UseJDice
 			{
 			System.out.println("Couldn't load look and feel " + looknFeelName + ", going with standard");
 			}
-
-		new JFrameDice(new JDice());
+		finally
+			{
+			new JFrameDice(new JDice());
+			}
 		}
 
 	/*------------------------------------------------------------------*\

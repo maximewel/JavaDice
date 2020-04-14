@@ -1,6 +1,7 @@
 
 package ch.hearc.dice.gui.graph;
 
+import java.awt.BorderLayout;
 import java.util.Map;
 
 import javax.swing.JPanel;
@@ -61,6 +62,8 @@ public class JGrapheLancerMoyen extends JPanel
 
 	private void geometry()
 		{
+		this.setLayout(new BorderLayout());
+
 		chart = ChartFactory.createBarChart("Lancer moyen par dé", // chart title
 				"Nombre de faces", // domain axis label
 				"Nombre de lancer", // range axis label
@@ -101,7 +104,6 @@ public class JGrapheLancerMoyen extends JPanel
 
 	private void appearance()
 		{
-		// rien
 		}
 
 	/*------------------------------------------------------------------*\

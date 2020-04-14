@@ -43,7 +43,7 @@ public class RunnableTimer implements Runnable
 			elapsedTime += currentTime - lastTime;
 			lastTime = currentTime;
 
-			double elapsedTimeInSecond = (double)elapsedTime / SECOND_IN_NANO;
+			elapsedTimeInSecond = (double)elapsedTime / SECOND_IN_NANO;
 			if (elapsedTimeInSecond >= 1)
 				{
 				elapsedTimeInSecond -= 1;

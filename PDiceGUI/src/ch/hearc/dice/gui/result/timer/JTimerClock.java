@@ -132,9 +132,9 @@ public class JTimerClock extends JPanel
 
 	private void updateSize()
 		{
-		int squareSize = Math.min(getWidth(), getHeight());
+		int squareSize = Math.min(getWidth(), getHeight()) - CLOCK_MARGIN;
 
-		dial = new Ellipse2D.Double(-squareSize / 4, -squareSize / 4, squareSize / 2, squareSize / 2);
+		dial = new Ellipse2D.Double(-squareSize / 2, -squareSize / 2, squareSize, squareSize);
 
 		double borderDial = dial.getHeight() / 2;
 		tickSize = borderDial / 10;
@@ -169,5 +169,6 @@ public class JTimerClock extends JPanel
 	private static final double ANGLE_SECOND = 2 * Math.PI / 60;
 	private static final int PEN_DIAL_STROKE = 5;
 	private static final int PEN_BIGTICK_STROKE = 2;
+	private static final int CLOCK_MARGIN = 10;
 
 	}

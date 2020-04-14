@@ -1,13 +1,14 @@
 
 package ch.hearc.dice.gui.result.timer;
 
-import java.awt.BorderLayout;
+import java.awt.Dimension;
 
-import javax.swing.JPanel;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 
 import ch.hearc.c_gui.tools.JCenterH;
 
-public class JTimer extends JPanel
+public class JTimer extends Box
 	{
 
 	/*------------------------------------------------------------------*\
@@ -16,6 +17,8 @@ public class JTimer extends JPanel
 
 	public JTimer()
 		{
+		super(BoxLayout.Y_AXIS);
+
 		geometry();
 		control();
 		appearance();
@@ -27,8 +30,13 @@ public class JTimer extends JPanel
 
 	public void start()
 		{
-		if (!tickThread.isAlive())
+		if (tickThread != null && tickThread.isAlive())
 			{
+			//pass
+			}
+		else
+			{
+			initThread();
 			tickThread.start();
 			}
 		}
@@ -48,15 +56,11 @@ public class JTimer extends JPanel
 
 	private void geometry()
 		{
-		this.setLayout(new BorderLayout());
-
 		timerClock = new JTimerClock();
 		timerDigit = new JTimerDigit();
 
-		initThread();
-
-		this.add(timerClock, BorderLayout.CENTER);
-		this.add(new JCenterH(timerDigit), BorderLayout.SOUTH);
+		this.add(timerClock);
+		this.add(new JCenterH(timerDigit));
 		}
 
 	private void control()
@@ -66,7 +70,8 @@ public class JTimer extends JPanel
 
 	private void appearance()
 		{
-		// rien
+		this.setMinimumSize(new Dimension(200, 200));
+		this.setPreferredSize(new Dimension(300, 300));
 		}
 
 	private void initThread()
@@ -87,5 +92,4 @@ public class JTimer extends JPanel
 
 	private Thread tickThread;
 	private RunnableTimer runnableTimer;
-
 	}

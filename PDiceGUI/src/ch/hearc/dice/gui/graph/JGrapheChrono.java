@@ -1,5 +1,7 @@
+
 package ch.hearc.dice.gui.graph;
 
+import java.awt.BorderLayout;
 import java.util.Map;
 
 import javax.swing.JPanel;
@@ -40,15 +42,17 @@ public class JGrapheChrono extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
-	public void updateData(Map<Integer, Chrono> data) {
+	public void updateData(Map<Integer, Chrono> data)
+		{
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-	    for (Map.Entry<Integer, Chrono> entry : data.entrySet()) {
-	    	dataset.addValue(entry.getValue().getTimeMS(), "Serie1", entry.getKey() + " Faces");
-		}
+		for(Map.Entry<Integer, Chrono> entry:data.entrySet())
+			{
+			dataset.addValue(entry.getValue().getTimeMS(), "Serie1", entry.getKey() + " Faces");
+			}
 
-	    ((CategoryPlot)chart.getPlot()).setDataset(0, dataset);
-	}
+		((CategoryPlot)chart.getPlot()).setDataset(0, dataset);
+		}
 
 	/*------------------------------*\
 	|*				Get				*|
@@ -60,41 +64,39 @@ public class JGrapheChrono extends JPanel
 
 	private void geometry()
 		{
-		chart = ChartFactory.createBarChart(
-	            "Temps d'execution par dé",          // chart title
-	            "Nombre de faces",               // domain axis label
-	            "temps en [ms]",                  // range axis label
-	            new DefaultCategoryDataset(),         // data
-	            PlotOrientation.VERTICAL,
-	            false,                    // include legend
-	            true,                     // tooltips?
-	            false                     // URL generator?  Not required...
-	        );
+		this.setLayout(new BorderLayout());
 
+		chart = ChartFactory.createBarChart("Temps d'execution par dé", // chart title
+				"Nombre de faces", // domain axis label
+				"temps en [ms]", // range axis label
+				new DefaultCategoryDataset(), // data
+				PlotOrientation.VERTICAL, false, // include legend
+				true, // tooltips?
+				false // URL generator?  Not required...
+		);
 
-	        // get a reference to the plot for further customisation...
-	        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+		// get a reference to the plot for further customisation...
+		CategoryPlot plot = (CategoryPlot)chart.getPlot();
 
-	        plot.mapDatasetToRangeAxis(1, 1);
+		plot.mapDatasetToRangeAxis(1, 1);
 
-	        CategoryAxis domainAxis = plot.getDomainAxis();
-	        domainAxis.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
+		CategoryAxis domainAxis = plot.getDomainAxis();
+		domainAxis.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
 
-	        LegendTitle legend1 = new LegendTitle(plot.getRenderer(0));
-	        legend1.setMargin(new RectangleInsets(2, 2, 2, 2));
-	        legend1.setFrame(new BlockBorder());
+		LegendTitle legend1 = new LegendTitle(plot.getRenderer(0));
+		legend1.setMargin(new RectangleInsets(2, 2, 2, 2));
+		legend1.setFrame(new BlockBorder());
 
+		BlockContainer container = new BlockContainer(new BorderArrangement());
+		container.add(legend1, RectangleEdge.LEFT);
+		container.add(new EmptyBlock(2000, 0));
+		CompositeTitle legends = new CompositeTitle(container);
+		legends.setPosition(RectangleEdge.BOTTOM);
+		chart.addSubtitle(legends);
 
-	        BlockContainer container = new BlockContainer(new BorderArrangement());
-	        container.add(legend1, RectangleEdge.LEFT);
-	        container.add(new EmptyBlock(2000, 0));
-	        CompositeTitle legends = new CompositeTitle(container);
-	        legends.setPosition(RectangleEdge.BOTTOM);
-	        chart.addSubtitle(legends);
+		ChartPanel cp = new ChartPanel(chart);
 
-	        ChartPanel cp = new ChartPanel(chart);
-
-			add(cp);
+		add(cp);
 		}
 
 	private void control()
@@ -104,7 +106,6 @@ public class JGrapheChrono extends JPanel
 
 	private void appearance()
 		{
-		// rien
 		}
 
 	/*------------------------------------------------------------------*\
@@ -113,9 +114,7 @@ public class JGrapheChrono extends JPanel
 
 	// Inputs
 
-
 	// Tools
 	private JFreeChart chart;
-
 
 	}

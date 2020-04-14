@@ -72,7 +72,7 @@ public class JMenu extends Box
 		//init tools
 		initializeComponents();
 
-		//setup the vertical arangment of the frame
+		//setup the vertical arangment of the frame, comp by comp
 		//title
 		this.add(new JCenterH(labelTitle));
 
@@ -141,8 +141,8 @@ public class JMenu extends Box
 			@Override
 			public void actionPerformed(ActionEvent e)
 				{
-				if (algoIteratif != null)
-					{ //some security
+				if (algoIteratif != null) //some security
+					{
 					algoIteratif.stop();
 					}
 				}
@@ -169,6 +169,8 @@ public class JMenu extends Box
 		buttonStart.setToolTipText("Start the process experience with given parameters");
 		buttonStop.setToolTipText("Gracefully stop the computing");
 		buttonKill.setToolTipText("Brutally stop the computing");
+
+		rangeIntegerSpinbox.setToolTipText("Maximum is not included, the range will be [minimum, maximum[");
 
 		buttonStart.setEnabled(true); //useless, just to be sure
 		buttonStop.setEnabled(false);
@@ -199,8 +201,6 @@ public class JMenu extends Box
 			@Override
 			public void iterationPerformed(IterationEvent it)
 				{
-				System.out.println("Algo " + it.getI());
-				System.out.println("  State : " + it.getEtatAlgo().toString());
 				//get algo at beggining
 				if (it.getEtatAlgo() == EtatAlgo.BEGIN)
 					{
@@ -224,7 +224,7 @@ public class JMenu extends Box
 		{
 		labelTitle = new JLabelTitle("Menu");
 		processingChoice = new JProcessingChoice(diceBuilder);
-		rangeIntegerSpinbox = new JRangeIntegerSpinbox("Dice faces choice", "Minimun faces : ", "Maximum faces :", 0, 10, diceBuilder);
+		rangeIntegerSpinbox = new JRangeIntegerSpinbox("Dice faces choice", "Minimun faces: ", "Maximum faces :", 0, 20, diceBuilder);
 		sliderTitled = new JLogScaleSlider("Number of experiences", BASE, SCALE_BASE_10, diceBuilder);
 
 		buttonStart = createStandardButton("Start", ImageShop.START_ICON.getImage());

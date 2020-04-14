@@ -1,6 +1,8 @@
 
 package ch.hearc.dice.gui.result.timer;
 
+import java.awt.Font;
+
 import javax.swing.JLabel;
 
 public class JTimerDigit extends JLabel
@@ -23,7 +25,9 @@ public class JTimerDigit extends JLabel
 
 	public void setTime(int h, int m, int s)
 		{
-		this.setText(h + ":" + m + ":" + s);
+		//%02d means an integer always displayed on 2 digits (more pleasing, as it will not change from 1 to 2 digits - stability)
+		Character split = (s % 2 == 0 ? ':' : ' ');
+		this.setText(String.format("%02d:%02d%c%02d", h, m, split, s));
 		}
 
 	/*------------------------------*\
@@ -46,7 +50,10 @@ public class JTimerDigit extends JLabel
 
 	private void appearance()
 		{
-		// rien
+		this.setFont(new Font(this.getFont().getFontName(), Font.BOLD, 30));
+
+		//avoid beeing empty at start
+		this.setTime(0, 0, 0);
 		}
 
 	/*------------------------------------------------------------------*\

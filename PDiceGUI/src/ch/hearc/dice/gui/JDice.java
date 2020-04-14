@@ -24,16 +24,7 @@ public class JDice extends JPanel
 		geometry();
 		control();
 		appearance();
-
 		}
-
-	/*------------------------------------------------------------------*\
-	|*							Methodes Public							*|
-	\*------------------------------------------------------------------*/
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
 
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
@@ -50,7 +41,7 @@ public class JDice extends JPanel
 		menu = new JMenu(result);
 
 		//init split pane with the two components
-		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(menu), /*new JScrollPane(result)*/ result);
+		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(menu), result);
 		this.add(splitPane);
 
 		}
@@ -64,7 +55,10 @@ public class JDice extends JPanel
 		splitPane.setOneTouchExpandable(true);
 
 		//frame start with 1:3 ratio between menu and graphs
-		JComponents.setWidth(menu, this.getWidth() / 4);
+		int menuLocation = this.getWidth() / 4;
+		JComponents.setWidth(menu, menuLocation);
+		splitPane.setDividerLocation(menuLocation + splitPane.getDividerSize());
+
 		}
 
 	/*------------------------------------------------------------------*\

@@ -4,6 +4,7 @@ package ch.hearc.dice.gui.result;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
+import ch.hearc.c_gui.tools.JMarge;
 import ch.hearc.dice.gui.graph.JGrapheChrono;
 import ch.hearc.dice.gui.graph.JGrapheLancerMoyen;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
@@ -19,7 +20,7 @@ public class JGraphes extends Box
 
 	public JGraphes()
 		{
-		super(BoxLayout.Y_AXIS);
+		super(BoxLayout.X_AXIS);
 		geometry();
 		control();
 		appearance();
@@ -47,9 +48,8 @@ public class JGraphes extends Box
 		graphNbLancer = new JGrapheLancerMoyen();
 		graphChrono = new JGrapheChrono();
 
-		add(graphNbLancer);
-		add(Box.createVerticalGlue());
-		add(graphChrono);
+		add(new JMarge(graphNbLancer, 5));
+		add(new JMarge(graphChrono, 5));
 
 		}
 

@@ -1,24 +1,25 @@
 
-package ch.hearc.dice.gui;
+package ch.hearc.dice.gui.result;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
-import ch.hearc.c_gui.tools.JComponents;
-import ch.hearc.c_gui.tools.jimage.JImage;
-import ch.hearc.c_gui.tools.jimage.TypeRendering;
-import ch.hearc.dice.tools.ImageShop;
+import ch.hearc.c_gui.tools.JCenter;
+import ch.hearc.dice.gui.result.timer.JTimer;
 
-public class JHeader extends Box
+public class JProgressLine extends Box
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JHeader()
+	public JProgressLine(JProgressBars progressBars, JTimer timer)
 		{
 		super(BoxLayout.X_AXIS);
+
+		this.progressBars = progressBars;
+		this.timer = timer;
 
 		geometry();
 		control();
@@ -26,19 +27,23 @@ public class JHeader extends Box
 		}
 
 	/*------------------------------------------------------------------*\
+	|*							Methodes Public							*|
+	\*------------------------------------------------------------------*/
+
+	/*------------------------------*\
+	|*				Get				*|
+	\*------------------------------*/
+
+	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
 	private void geometry()
 		{
-
-		imageHearc = new JImage(ImageShop.LOGO_HEARC.getImage(), TypeRendering.KEEP_RATIO);
-		JComponents.setHeight(imageHearc, 50);
-
 		this.add(Box.createHorizontalGlue());
-		this.add(imageHearc);
+		this.add(new JCenter(progressBars));
+		this.add(timer);
 		this.add(Box.createHorizontalGlue());
-
 		}
 
 	private void control()
@@ -55,7 +60,10 @@ public class JHeader extends Box
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 
+	// Inputs
+	private JProgressBars progressBars;
+	private JTimer timer;
+
 	// Tools
-	JImage imageHearc;
 
 	}
