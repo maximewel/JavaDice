@@ -1,14 +1,14 @@
 
 package ch.hearc.dice.moo.implementation;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.TreeMap;
 
 import ch.hearc.b_poo.thread.vecteur.Interval;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
-import ch.hearc.tools.AlgoIteratif_A;
 import ch.hearc.tools.Chrono;
+import ch.hearc.tools.algo.AlgoIteratif_A;
 
 public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 	{
@@ -23,8 +23,8 @@ public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 		this.nbExperience = nbExperience;
 		this.nbFaces = nbFaces;
 		this.typeProcessing = type;
-		this.mapFaceLancer = new HashMap<Integer, Integer>();
-		this.mapChronoLancer = new HashMap<Integer, Chrono>();
+		this.mapFaceLancer = new TreeMap<Integer, Integer>();
+		this.mapChronoLancer = new TreeMap<Integer, Chrono>();
 		}
 
 	/*------------------------------------------------------------------*\
@@ -55,10 +55,6 @@ public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 		this.mapChronoLancer.put(nbFaces.getA() + i, chrono);
 		this.mapFaceLancer.put(nbFaces.getA() + i, dice.getNbLancerMoyen());
 
-		if (!currNbFace.hasNext())
-			{
-				this.stop();
-			}
 		}
 
 	@Override
@@ -71,7 +67,7 @@ public class DiceVariable extends AlgoIteratif_A implements DiceVariable_I
 	@Override
 	public boolean isFinished(int i)
 		{
-		return this.mapFaceLancer.keySet().contains(nbFaces.getA() + i);
+		return i == (nbFaces.getB() - nbFaces.getA());
 		}
 
 	@Override

@@ -4,8 +4,8 @@ package ch.hearc.dice.moo.implementation;
 import ch.hearc.b_poo.thread.vecteur.Interval;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
 import ch.hearc.dice.moo.specifications.FactoryDiceVariable;
-import ch.hearc.tools.IterationEvent;
-import ch.hearc.tools.IterationListener_I;
+import ch.hearc.tools.algo.IterationEvent;
+import ch.hearc.tools.algo.IterationListener_I;
 
 public class UseDiceVariableListener
 	{

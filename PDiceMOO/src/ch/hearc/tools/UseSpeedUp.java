@@ -19,7 +19,7 @@ public class UseSpeedUp
 		{
 		System.out.println("Please wait ...\n");
 
-		String aString = System.getProperty("nbFace", "6");
+		String aString = System.getProperty("nbFace", "12");
 		String bString = System.getProperty("nbExperience", "23000");
 
 		try

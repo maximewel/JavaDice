@@ -17,11 +17,11 @@ import ch.hearc.c_gui.tools.JComponents;
 import ch.hearc.dice.gui.result.JResult;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
 import ch.hearc.dice.tools.ImageShop;
-import ch.hearc.tools.AlgoIteratif_A;
 import ch.hearc.tools.DiceBuilder;
-import ch.hearc.tools.EtatAlgo;
-import ch.hearc.tools.IterationEvent;
-import ch.hearc.tools.IterationListener_I;
+import ch.hearc.tools.algo.AlgoIteratif_A;
+import ch.hearc.tools.algo.EtatAlgo;
+import ch.hearc.tools.algo.IterationEvent;
+import ch.hearc.tools.algo.IterationListener_I;
 
 public class JMenu extends Box
 	{
