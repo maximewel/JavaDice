@@ -24,7 +24,6 @@ public class JLabelTitle extends JLabel
 
 	public JLabelTitle(String text)
 		{
-
 		super(text);
 
 		appearance();

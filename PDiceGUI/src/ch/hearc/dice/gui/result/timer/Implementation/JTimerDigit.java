@@ -1,10 +1,18 @@
 
-package ch.hearc.dice.gui.result.timer;
+package ch.hearc.dice.gui.result.timer.Implementation;
 
 import java.awt.Font;
 
 import javax.swing.JLabel;
 
+/**
+ * <pre>
+ * JTimerDigit
+ * <br>
+ * Display digit similarly to a digital clock
+ * @author maxime.welcklen, Mendes Reis Steve
+ *
+ */
 public class JTimerDigit extends JLabel
 	{
 
@@ -25,27 +33,23 @@ public class JTimerDigit extends JLabel
 
 	public void setTime(int h, int m, int s)
 		{
-		//%02d means an integer always displayed on 2 digits (more pleasing, as it will not change from 1 to 2 digits - stability)
+		//add a cheap time-passing animation :-)
 		Character split = (s % 2 == 0 ? ':' : ' ');
+		//%02d means an integer always displayed on 2 digits (more pleasing, as it will not change from 1 to 2 digits - stability)
 		this.setText(String.format("%02d:%02d%c%02d", h, m, split, s));
 		}
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
 	private void geometry()
 		{
-		// TODO
+		//pass
 		}
 
 	private void control()
 		{
-		// rien
+		//pass
 		}
 
 	private void appearance()
@@ -59,9 +63,4 @@ public class JTimerDigit extends JLabel
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
-
-	// Inputs
-
-	// Tools
-
 	}

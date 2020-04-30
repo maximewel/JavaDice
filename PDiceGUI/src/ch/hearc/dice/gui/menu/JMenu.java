@@ -23,6 +23,14 @@ import ch.hearc.tools.EtatAlgo;
 import ch.hearc.tools.IterationEvent;
 import ch.hearc.tools.IterationListener_I;
 
+/**
+ * <pre>
+ * JMenu
+ * <br>
+ * menu allowing to customize the experiences
+ * @author maxime.welcklen, Mendes Reis Steve
+ *
+ */
 public class JMenu extends Box
 	{
 
@@ -37,7 +45,7 @@ public class JMenu extends Box
 		this.jResult = jResult;
 
 		//important : builder is necessary during creation of components - do it before anything else
-		diceBuilder = new DiceBuilder();
+		this.diceBuilder = new DiceBuilder();
 
 		geometry();
 		control();
@@ -58,11 +66,6 @@ public class JMenu extends Box
 		{
 		return Box.createHorizontalStrut(SPACING);
 		}
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -277,5 +280,4 @@ public class JMenu extends Box
 	private static final int BASE = 10;
 	private static final int MAX_NUMBER_EXPERIENCE = 1000000000;
 	private static final int SCALE_BASE_10 = (int)Math.ceil(Math.log10(MAX_NUMBER_EXPERIENCE));
-
 	}

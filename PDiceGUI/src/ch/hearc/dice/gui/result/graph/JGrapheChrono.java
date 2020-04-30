@@ -1,5 +1,5 @@
 
-package ch.hearc.dice.gui.graph;
+package ch.hearc.dice.gui.result.graph;
 
 import java.awt.BorderLayout;
 import java.util.Map;
@@ -25,6 +25,13 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import ch.hearc.tools.Chrono;
 
+/**
+ * <pre>
+ * Use JFreeChart to display a chart of calcul duration
+ * <br>
+ * @author maxime.welcklen, mendesreis.steve
+ *
+ */
 public class JGrapheChrono extends JPanel
 	{
 
@@ -53,11 +60,6 @@ public class JGrapheChrono extends JPanel
 
 		((CategoryPlot)chart.getPlot()).setDataset(0, dataset);
 		}
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -101,19 +103,17 @@ public class JGrapheChrono extends JPanel
 
 	private void control()
 		{
-		// rien
+		//pass
 		}
 
 	private void appearance()
 		{
+		//pass
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
-
-	// Inputs
-
 	// Tools
 	private JFreeChart chart;
 

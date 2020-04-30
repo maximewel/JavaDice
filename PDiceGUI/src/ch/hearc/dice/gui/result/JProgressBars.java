@@ -19,6 +19,15 @@ import ch.hearc.tools.AlgoIteratif_A;
 import ch.hearc.tools.IterationEvent;
 import ch.hearc.tools.IterationListener_I;
 
+/**
+ * <pre>
+ * JProgressBars
+ * <br>
+ * Component that display the state and progression of the current experience using a 'running' progress bar, and a 'current' progress bar<br>
+ * Current has a toggle on/off HSB display
+ * @author maxime.welcklen, Mendes Reis Steve
+ *
+ */
 public class JProgressBars extends JPanel
 	{
 
@@ -28,7 +37,6 @@ public class JProgressBars extends JPanel
 
 	public JProgressBars(String descTop, String descBot)
 		{
-
 		this.descTop = descTop;
 		this.descBot = descBot;
 
@@ -46,11 +54,6 @@ public class JProgressBars extends JPanel
 		this.diceVariable_I = diceVariable_I;
 		updateListener();
 		}
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -71,7 +74,6 @@ public class JProgressBars extends JPanel
 		this.add(progressHSB);
 		this.add(new JLabel("HSB display : "));
 		this.add(checkBoxHSB);
-
 		}
 
 	private void control()
@@ -106,6 +108,7 @@ public class JProgressBars extends JPanel
 		{
 		diceVariable_I.addIterationListener(new IterationListener_I()
 			{
+
 			@Override
 			public void iterationPerformed(IterationEvent iterationEvent)
 				{

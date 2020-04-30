@@ -10,6 +10,12 @@ import javax.swing.JFrame;
 import ch.hearc.c_gui.tools.JMarge;
 import ch.hearc.dice.tools.ImageShop;
 
+/**
+ * <pre>
+ * decorated frame used to contain JDice
+ * @author maxime.welcklen, mendesreis.steve
+ *
+ */
 public class JFrameDice extends JFrame
 	{
 
@@ -63,7 +69,4 @@ public class JFrameDice extends JFrame
 
 	// Inputs
 	private JComponent component;
-
-	// Tools
-
 	}

@@ -1,5 +1,5 @@
 
-package ch.hearc.dice.gui.graph;
+package ch.hearc.dice.gui.result.graph;
 
 import java.awt.BorderLayout;
 import java.util.Map;
@@ -23,6 +23,13 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+/**
+ * <pre>
+ * Use JFreeChart to display a chart of roll's mean number
+ * <br>
+ * @author maxime.welcklen, mendesreis.steve
+ *
+ */
 public class JGrapheLancerMoyen extends JPanel
 	{
 
@@ -51,11 +58,6 @@ public class JGrapheLancerMoyen extends JPanel
 
 		((CategoryPlot)chart.getPlot()).setDataset(0, dataset);
 		}
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -99,19 +101,17 @@ public class JGrapheLancerMoyen extends JPanel
 
 	private void control()
 		{
-		// rien
+		//pass
 		}
 
 	private void appearance()
 		{
+		//pass
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
-
-	// Inputs
-
 	// Tools
 	private JFreeChart chart;
 

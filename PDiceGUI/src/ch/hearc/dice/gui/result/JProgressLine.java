@@ -5,8 +5,16 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 
 import ch.hearc.c_gui.tools.JCenter;
-import ch.hearc.dice.gui.result.timer.JTimer;
+import ch.hearc.dice.gui.result.timer.Implementation.JTimer;
 
+/**
+ * <pre>
+ * JProgressLine
+ * <br>
+ * Horizontal line that displays the state, duration and progression of the experience (with progressbars and JTimer)
+ * @author maxime.welcklen
+ *
+ */
 public class JProgressLine extends Box
 	{
 
@@ -25,15 +33,6 @@ public class JProgressLine extends Box
 		control();
 		appearance();
 		}
-
-	/*------------------------------------------------------------------*\
-	|*							Methodes Public							*|
-	\*------------------------------------------------------------------*/
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -63,7 +62,4 @@ public class JProgressLine extends Box
 	// Inputs
 	private JProgressBars progressBars;
 	private JTimer timer;
-
-	// Tools
-
 	}

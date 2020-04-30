@@ -74,12 +74,12 @@ public class JButtonLine extends Box
 
 	private void control()
 		{
-		// rien
+		//pass
 		}
 
 	private void appearance()
 		{
-		// rien
+		//pass
 		}
 
 	/*------------------------------------------------------------------*\
@@ -88,8 +88,7 @@ public class JButtonLine extends Box
 
 	// Inputs
 	private JButton[] buttons;
+
+	//tool
 	private boolean first = true;
-
-	// Tools
-
 	}

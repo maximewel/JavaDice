@@ -18,13 +18,21 @@ import javax.swing.event.ChangeListener;
 import ch.hearc.c_gui.tools.JCenter;
 import ch.hearc.tools.DiceBuilder;
 
+/**
+ * <pre>
+ * JRangeIntegerSpinbox
+ * <br>
+ * Component composed of 2 linked spinners
+ * Ensuire min and max will always be coherent
+ * @author maxime.welcklen, Mendes Reis Steve
+ *
+ */
 public class JRangeIntegerSpinbox extends JPanel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
-
 	public JRangeIntegerSpinbox(String title, String descMinSpinner, String descMaxspinner, int min, int max, DiceBuilder diceBuilder)
 		{
 		super();
@@ -211,6 +219,6 @@ public class JRangeIntegerSpinbox extends JPanel
 	// Tools
 	private JSpinner spinMin;
 	private JSpinner spinMax;
-	GridLayout gridLayout;
+	private GridLayout gridLayout;
 
 	}

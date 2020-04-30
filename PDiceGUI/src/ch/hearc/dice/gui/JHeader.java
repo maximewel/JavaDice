@@ -9,6 +9,12 @@ import ch.hearc.c_gui.tools.jimage.JImage;
 import ch.hearc.c_gui.tools.jimage.TypeRendering;
 import ch.hearc.dice.tools.ImageShop;
 
+/**
+ * <pre>
+ * Header containing the he-arc logo
+ * @author maxime.welcklen, mendesreis.steve
+ *
+ */
 public class JHeader extends Box
 	{
 
@@ -43,12 +49,12 @@ public class JHeader extends Box
 
 	private void control()
 		{
-		// rien
+		//pass
 		}
 
 	private void appearance()
 		{
-		// rien
+		//pass
 		}
 
 	/*------------------------------------------------------------------*\
@@ -56,6 +62,6 @@ public class JHeader extends Box
 	\*------------------------------------------------------------------*/
 
 	// Tools
-	JImage imageHearc;
+	private JImage imageHearc;
 
 	}

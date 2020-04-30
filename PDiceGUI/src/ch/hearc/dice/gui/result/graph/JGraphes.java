@@ -1,16 +1,22 @@
 
-package ch.hearc.dice.gui.result;
+package ch.hearc.dice.gui.result.graph;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
 import ch.hearc.c_gui.tools.JMarge;
-import ch.hearc.dice.gui.graph.JGrapheChrono;
-import ch.hearc.dice.gui.graph.JGrapheLancerMoyen;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
 import ch.hearc.tools.IterationEvent;
 import ch.hearc.tools.IterationListener_I;
 
+/**
+ * <pre>
+ * JGraphes
+ * <br>
+ * Component displaying the result of experiences within 2 graphes
+ * @author maxime.welcklen, mendesreis.steve
+ *
+ */
 public class JGraphes extends Box
 	{
 
@@ -35,10 +41,6 @@ public class JGraphes extends Box
 		updateListener();
 		}
 
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -50,16 +52,16 @@ public class JGraphes extends Box
 
 		add(new JMarge(graphNbLancer, 5));
 		add(new JMarge(graphChrono, 5));
-
 		}
 
 	private void control()
 		{
+		//pass
 		}
 
 	private void appearance()
 		{
-		//rien
+		//pass
 		}
 
 	private void updateListener()
@@ -84,9 +86,4 @@ public class JGraphes extends Box
 	private JGrapheLancerMoyen graphNbLancer;
 	private JGrapheChrono graphChrono;
 	private DiceVariable_I diceVar;
-
-	// Tools
-
-	//output
-
 	}

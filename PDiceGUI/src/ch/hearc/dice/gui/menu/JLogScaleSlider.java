@@ -25,7 +25,7 @@ import ch.hearc.tools.DiceBuilder;
  * <pre>
  * JSlider on a logaritmic scale
  *
- * Base, Scale : Goes from 1 to base ^ scale
+ * Base, Scale : Slider values go from 1 to base ^ scale
  * Appearence : Put a tick every base^n for n in 0...scale
  * <br>
  * @author maxime.welcklen, Mendes Reis Steve
@@ -40,7 +40,6 @@ public class JLogScaleSlider extends Box
 
 	public JLogScaleSlider(String title, int base, int scale, DiceBuilder diceBuilder)
 		{
-
 		super(BoxLayout.Y_AXIS);
 
 		this.scale = scale;
@@ -87,7 +86,7 @@ public class JLogScaleSlider extends Box
 				double doubleValue = (double)rawValue / TICK_PRECISION;
 				int logValue = (int)Math.pow(base, doubleValue);
 
-				//set current value as text, a bit more human readable
+				//set current value as text for user, a bit more human readable
 				String numberAsString = decimalFormat.format(logValue);
 				labelCurrentValue.setText(numberAsString);
 
@@ -101,7 +100,7 @@ public class JLogScaleSlider extends Box
 
 	private void appearance()
 		{
-		//set the logaritmic scale labels
+		//set the logarithmic scale labels
 		Dictionary<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
 		NumberFormat formatter = new DecimalFormat("0.##E0"); //allow for compact display of big numbers
 		for(int i = 0; i <= this.scale; i++)
@@ -121,7 +120,6 @@ public class JLogScaleSlider extends Box
 		Border outsideBorder = BorderFactory.createTitledBorder(lineBorder, title, TitledBorder.CENTER, TitledBorder.TOP);
 		Border marginBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		this.setBorder(BorderFactory.createCompoundBorder(outsideBorder, marginBorder));
-
 		}
 
 	/*------------------------------------------------------------------*\
@@ -138,6 +136,8 @@ public class JLogScaleSlider extends Box
 	private JLabel labelCurrentValue;
 	private DiceBuilder diceBuilder;
 
+	//we have 'tick_precision' number ticks for each integer on the slider
+	//ex : for tick at 100, between 0.0 and 1.0, we will recognize 100 value (precision of 1/100)
 	private static final int TICK_PRECISION = 100;
 
 	}

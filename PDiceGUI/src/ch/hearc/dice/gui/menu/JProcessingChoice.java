@@ -16,6 +16,14 @@ import javax.swing.border.TitledBorder;
 import ch.hearc.dice.moo.implementation.TypeProcessing;
 import ch.hearc.tools.DiceBuilder;
 
+/**
+ * <pre>
+ * JProcessingChoice
+ * <br>
+ * JRadionbuttons to select the processing choice
+ * @author maxime.welcklen, Mendes Reis Steve
+ *
+ */
 public class JProcessingChoice extends Box
 	{
 
@@ -48,15 +56,18 @@ public class JProcessingChoice extends Box
 
 	private void geometry()
 		{
+		//add buttons
 		radioButtonSequential = new JRadioButton("Sequential");
 		radioButtonParallel = new JRadioButton("Parallel");
 		radioButtonRunnable = new JRadioButton("Runnable");
 
+		//put them in an exclusive group
 		ButtonGroup groupe = new ButtonGroup();
 		groupe.add(radioButtonSequential);
 		groupe.add(radioButtonParallel);
 		groupe.add(radioButtonRunnable);
 
+		//add them !
 		Box boxV = new Box(BoxLayout.Y_AXIS);
 
 		boxV.add(JMenu.createVSpacing());
@@ -67,10 +78,10 @@ public class JProcessingChoice extends Box
 		boxV.add(radioButtonRunnable);
 		boxV.add(JMenu.createVSpacing());
 
+		//center buttons horizontally
 		this.add(Box.createHorizontalGlue());
 		this.add(boxV);
 		this.add(Box.createHorizontalGlue());
-
 		}
 
 	private void control()
@@ -101,6 +112,7 @@ public class JProcessingChoice extends Box
 		Border marginBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		this.setBorder(BorderFactory.createCompoundBorder(outsideBorder, marginBorder));
 
+		//synchronize buttons and builder
 		radioButtonSequential.setSelected(true);
 		diceBuilder.setTypeProcessing(TypeProcessing.SEQUENTIEL);
 		}

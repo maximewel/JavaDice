@@ -15,6 +15,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.JProgressBar;
 
+/**
+ * <pre>
+ * JProgressHSB
+ * <br>
+ * JProgressbar that has a toggle on/off HSB display
+ * @author maxime.welcklen, Mendes Reis Steve
+ *
+ */
 public class JProgressHSB extends JProgressBar
 	{
 
@@ -81,11 +89,6 @@ public class JProgressHSB extends JProgressBar
 		{
 		g2d.drawImage(bImage, 0, 0, null);
 		}
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -110,7 +113,6 @@ public class JProgressHSB extends JProgressBar
 			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
 			g2d.drawString(progressString, x, y);
 			}
-
 		}
 
 	private void geometry()
@@ -190,9 +192,6 @@ public class JProgressHSB extends JProgressBar
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
-
-	// Inputs
-
 	// Tools
 	private BufferedImage bImage;
 	private AtomicBoolean isHSBEnabled;

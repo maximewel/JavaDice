@@ -7,9 +7,7 @@ import ch.hearc.c_gui.tools.image.ImageLoader;
 
 /**
 * <pre>
-* Les images doivent se trouver dans un jar, et le jar dans le classapth!
-* Le jar doit contenir le folder ressources/cours.
-* A l'interieur du folder cours doit se trouver les images aux formats (jpg, voir mieux png pour la transparance)
+* Images are contained in a ressource jar
 * </pre>
 */
 public class ImageShop

@@ -1,5 +1,5 @@
 
-package ch.hearc.dice.gui.result.timer;
+package ch.hearc.dice.gui.result.timer.Implementation;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -15,6 +15,15 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
 
+/**
+ * <pre>
+ * JTimerClock
+ * <br>
+ * Clock displaying time, CFF style
+ * unlike CFF, this clock is always on time.
+ * @author maxime.welcklen, Mendes Reis Steve
+ *
+ */
 public class JTimerClock extends JPanel
 	{
 
@@ -48,15 +57,18 @@ public class JTimerClock extends JPanel
 		//center
 		g2d.translate(getWidth() / 2, getHeight() / 2);
 
+		//draw central dial
 		g2d.setStroke(new BasicStroke(PEN_DIAL_STROKE));
 		g2d.draw(dial);
 
+		//draw every tick around the dial, and the red stick at the correct second
 		Rectangle2D stringBounds = getStringBounds("00", g2d);
 		for(int i = 0; i < 60; i++)
 			{
 
 			if (i % 5 == 0)
 				{
+				//draw big tick every 5s with corresponding second
 				g2d.setStroke(new BasicStroke(PEN_BIGTICK_STROKE));
 				g2d.draw(bigTick);
 
@@ -65,11 +77,13 @@ public class JTimerClock extends JPanel
 				}
 			else
 				{
+				//draw little tick every second
 				g2d.setStroke(new BasicStroke(PEN_BIGTICK_STROKE / 2));
 				g2d.draw(littleTick);
 				}
 			if (i == seconds)
 				{
+				//draw the red stick
 				Color stockColor = g2d.getColor();
 
 				g2d.setStroke(new BasicStroke(PEN_BIGTICK_STROKE));
@@ -94,7 +108,7 @@ public class JTimerClock extends JPanel
 
 	private void geometry()
 		{
-		// TODO Auto-generated method stub
+		//pass
 		}
 
 	private Rectangle2D getStringBounds(String string, Graphics2D g2d)
@@ -121,11 +135,6 @@ public class JTimerClock extends JPanel
 		{
 		updateSize();
 		}
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
@@ -147,13 +156,13 @@ public class JTimerClock extends JPanel
 
 		pointerRound = new Ellipse2D.Double(-pointerRoundRaidus / 2, -(pointerSize + pointerRoundRaidus), pointerRoundRaidus, pointerRoundRaidus);
 		pointerStick = new Line2D.Double(0, 0, 0, -pointerSize);
-
 		}
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
 	// Tools
+	//time tracking
 	private int seconds;
 
 	//drawing variables
@@ -161,14 +170,13 @@ public class JTimerClock extends JPanel
 	private Line2D.Double littleTick;
 	private Line2D.Double bigTick;
 
+	//avoid recreating/recalculating constantly
 	private Ellipse2D.Double pointerRound;
 	private Line2D.Double pointerStick;
-
 	private double tickSize;
 
 	private static final double ANGLE_SECOND = 2 * Math.PI / 60;
 	private static final int PEN_DIAL_STROKE = 5;
 	private static final int PEN_BIGTICK_STROKE = 2;
 	private static final int CLOCK_MARGIN = 10;
-
 	}
