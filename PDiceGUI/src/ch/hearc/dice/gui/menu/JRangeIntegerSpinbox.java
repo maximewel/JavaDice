@@ -115,11 +115,17 @@ public class JRangeIntegerSpinbox extends JPanel
 				int spinMaxValue = (int)spinMax.getValue();
 
 				if (spinMinValue >= spinMaxValue) { // verify if the min spin goes upper the max limit and adjust the value if necessary
-					if (++spinMaxValue > max) spinMin.setValue((--spinMaxValue)-1);
+					if (++spinMaxValue > max)
+						{
+							spinMin.setValue(spinMinValue = (spinMaxValue=max)-1);
+						}
 					spinMax.setValue(spinMaxValue);
 				}
 
-				diceBuilder.setInterval((int)spinMin.getValue(), (int)spinMax.getValue());
+				if (spinMaxValue > spinMinValue) // verify intervals are correct
+					{
+						diceBuilder.setInterval(spinMinValue, spinMaxValue);
+					}
 				}
 
 			};
@@ -142,11 +148,17 @@ public class JRangeIntegerSpinbox extends JPanel
 				int spinMaxValue = (int)spinMax.getValue();
 
 				if (spinMaxValue <= spinMinValue) { // verify if the max spin goes under the min limit and adjust the value if necessary
-					if (--spinMinValue < min) spinMax.setValue((++spinMinValue)+1);
+					if (--spinMinValue < min)
+						{
+							spinMax.setValue(spinMaxValue = (spinMinValue=min)+1);
+						}
 					spinMin.setValue(spinMinValue);
 				}
 
-				diceBuilder.setInterval((int)spinMin.getValue(), (int)spinMax.getValue());
+				if (spinMaxValue > spinMinValue) // verify intervals are correct
+					{
+					diceBuilder.setInterval(spinMinValue, spinMaxValue);
+					}
 				}
 
 			};
