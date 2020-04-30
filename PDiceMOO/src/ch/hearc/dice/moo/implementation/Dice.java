@@ -3,7 +3,7 @@ package ch.hearc.dice.moo.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.jupiter.api.Assertions;
 
@@ -32,7 +32,7 @@ public class Dice implements Runnable
 	@Override
 	public void run()
 		{
-		nbLancer = new AtomicInteger();
+		nbLancer = new AtomicLong();
 
 		int nbCores = Runtime.getRuntime().availableProcessors();
 		// availableProcessors never return value under 1 so it's ok to not control it
@@ -56,6 +56,9 @@ public class Dice implements Runnable
 			case SEQUENTIEL:
 				versionSequentiel();
 				break;
+			case RUNNABLE:
+				versionRunnable();
+				break;
 			default:
 				Assertions.fail();
 				break;
@@ -64,6 +67,16 @@ public class Dice implements Runnable
 		double mean = nbLancer.get() / (double)nbExperience;
 
 		this.nbLancerMoyen = (int)Math.ceil(mean);
+		}
+
+	private void versionRunnable()
+		{
+		for(Interval interval:intervals)
+			{
+			Runnable runnable = createRunnable(interval);
+			runnable.run();
+			}
+
 		}
 
 	private void versionSequentiel()
@@ -102,7 +115,6 @@ public class Dice implements Runnable
 		{
 		return new Runnable()
 			{
-
 			@Override
 			public void run()
 				{
@@ -182,7 +194,7 @@ public class Dice implements Runnable
 	private List<Interval> intervals;
 
 	//Output
-	private AtomicInteger nbLancer;
+	private AtomicLong nbLancer;
 	private int nbLancerMoyen;
 
 	}

@@ -1,5 +1,5 @@
 
-package ch.hearc.tools;
+package ch.hearc.tools.algo;
 
 
 

@@ -122,33 +122,17 @@ public class JRangeIntegerSpinbox extends JPanel
 				int spinMinValue = (int)spinMin.getValue();
 				int spinMaxValue = (int)spinMax.getValue();
 
-				diceBuilder.setInterval(spinMinValue, spinMaxValue);
-
-				//Juste a little security verifivation
-				if (spinMinValue < min)
-					{
-					spinMin.setValue(min);
-					diceBuilder.setMin(min);
-					}
-
-				//UI : We want the min spinner to never be above the max one
-				//we take action if it is the case
-				if (spinMinValue > spinMaxValue)
-					{
-
-					// '<=' because we can have both spinner at max value
-					if (spinMinValue <= max)
+				if (spinMinValue >= spinMaxValue) { // verify if the min spin goes upper the max limit and adjust the value if necessary
+					if (++spinMaxValue > max)
 						{
-						spinMax.setValue(spinMinValue);
-						diceBuilder.setMax(spinMinValue);
+							spinMin.setValue(spinMinValue = (spinMaxValue=max)-1);
 						}
-					else //user tries to go too far : stop the action, go to max
-						{
-						spinMin.setValue(max);
-						spinMax.setValue(max);
-						diceBuilder.setInterval(max, max);
-						}
+					spinMax.setValue(spinMaxValue);
+				}
 
+				if (spinMaxValue > spinMinValue) // verify intervals are correct
+					{
+						diceBuilder.setInterval(spinMinValue, spinMaxValue);
 					}
 				}
 
@@ -171,33 +155,17 @@ public class JRangeIntegerSpinbox extends JPanel
 				int spinMinValue = (int)spinMin.getValue();
 				int spinMaxValue = (int)spinMax.getValue();
 
-				diceBuilder.setInterval(spinMinValue, spinMaxValue);
-
-				//Juste a little security verifivation
-				if (spinMaxValue > max)
-					{
-					spinMax.setValue(max);
-					diceBuilder.setMax(max);
-					}
-
-				//UI : We want the max spinner to always be above the min one
-				//we take action if it is not the case
-				if (spinMaxValue < spinMinValue)
-					{
-
-					// '>=' because we can have both spinner at min value
-					if (spinMaxValue >= min)
+				if (spinMaxValue <= spinMinValue) { // verify if the max spin goes under the min limit and adjust the value if necessary
+					if (--spinMinValue < min)
 						{
-						spinMin.setValue(spinMaxValue);
-						diceBuilder.setMin(spinMaxValue);
+							spinMax.setValue(spinMaxValue = (spinMinValue=min)+1);
 						}
-					else //user tries to go too far : stop the action, go to max
-						{
-						spinMax.setValue(min);
-						spinMin.setValue(min);
-						diceBuilder.setInterval(min, min);
-						}
+					spinMin.setValue(spinMinValue);
+				}
 
+				if (spinMaxValue > spinMinValue) // verify intervals are correct
+					{
+					diceBuilder.setInterval(spinMinValue, spinMaxValue);
 					}
 				}
 

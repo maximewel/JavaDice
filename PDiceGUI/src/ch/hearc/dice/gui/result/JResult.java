@@ -9,8 +9,8 @@ import ch.hearc.dice.gui.result.timer.Implementation.JTimer;
 import ch.hearc.dice.gui.result.timer.Implementation.ThreadedAnimator;
 import ch.hearc.dice.gui.result.timer.specifications.IAnimator;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
-import ch.hearc.tools.IterationEvent;
-import ch.hearc.tools.IterationListener_I;
+import ch.hearc.tools.algo.IterationEvent;
+import ch.hearc.tools.algo.IterationListener_I;
 
 /**
  * <pre>

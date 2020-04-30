@@ -4,7 +4,7 @@ import java.util.Map;
 
 import ch.hearc.b_poo.thread.vecteur.Interval;
 import ch.hearc.tools.Chrono;
-import ch.hearc.tools.IterationListener_I;
+import ch.hearc.tools.algo.IterationListener_I;
 
 public interface DiceVariable_I extends Runnable
 	{

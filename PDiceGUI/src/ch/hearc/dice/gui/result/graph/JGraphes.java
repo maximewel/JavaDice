@@ -6,8 +6,8 @@ import javax.swing.BoxLayout;
 
 import ch.hearc.c_gui.tools.JMarge;
 import ch.hearc.dice.moo.specifications.DiceVariable_I;
-import ch.hearc.tools.IterationEvent;
-import ch.hearc.tools.IterationListener_I;
+import ch.hearc.tools.algo.IterationEvent;
+import ch.hearc.tools.algo.IterationListener_I;
 
 /**
  * <pre>
